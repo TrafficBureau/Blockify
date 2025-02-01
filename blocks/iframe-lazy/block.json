@@ -1,5 +1,5 @@
 {
-  "name": "acf/iframe-lazy",
+  "name": "acf/iframe-lazy-blockify",
   "title": "Iframe Lazy",
   "description": "",
   "style": [ "file:./iframe-lazy.css" ],
