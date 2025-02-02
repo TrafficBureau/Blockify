@@ -34,6 +34,15 @@ function register_hero_acf_fields()
                 'instructions' => 'Image size: 650x774. Not required.',
             ),
             array(
+                'key' => 'field_hero_color',
+                'label' => 'Background color',
+                'name' => 'hero_color',
+                'type' => 'color_picker',
+                'required' => 1,
+                'default_value' => '#ededed',
+                'enable_opacity' => false,
+            ),
+            array(
                 'key' => 'field_hero_cards',
                 'label' => 'Cards',
                 'name' => 'hero_cards',

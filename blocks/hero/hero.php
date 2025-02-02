@@ -2,24 +2,28 @@
 
 $hero_title = get_field('hero_title');
 $hero_subtitle = get_field('hero_subtitle');
-$hero_image = get_field('hero_image');
-
-$src = !empty($hero_image['url']) ? $hero_image['url'] : blockify_get_file_url('/blocks/hero/hero.png');
+$hero_image = get_field('hero_image') ?: blockify_get_file_url('/blocks/hero/hero.png');
+$hero_color = get_field('hero_color') ?: '#ededed';
 
 ?>
 
+<style>
+    :root {
+        --blockify-hero-background-color-v2: <?= $hero_color ?>;
+    }
+</style>
 
 <div class="blockify-hero">
     <header class="heading">
-        <h2 class="title">
+        <div class="title">
             <?= $hero_title ?>
-        </h2>
+        </div>
         <p class="subtitle">
             <?= $hero_subtitle ?>
         </p>
     </header>
     <div class="hero-image">
-        <img src="<?= $src ?>" alt="hero">
+        <img src="<?= $hero_image ?>" alt="hero">
     </div>
     <div class="cards js-blockify-cards">
         <?php
@@ -38,7 +42,7 @@ $src = !empty($hero_image['url']) ? $hero_image['url'] : blockify_get_file_url('
                     <?php endif; ?>
 
                     <div class="content">
-                        <h3 class="title"><?= esc_html($title) ?></h3>
+                        <div class="title"><?= esc_html($title) ?></div>
                         <div class="text">
                             <?= wp_kses_post($text) ?>
                         </div>
