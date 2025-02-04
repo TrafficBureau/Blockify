@@ -4,6 +4,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-global $blockify_plugin_dir;
+function register_fields($block) {
+    global $blockify_plugin_dir;
+    require_once $blockify_plugin_dir . '/blocks/' . $block . '/fields.php';
+}
 
-require_once $blockify_plugin_dir . '/blocks/hero/fields.php';
+register_fields('hero');
+register_fields('pro-steps');
