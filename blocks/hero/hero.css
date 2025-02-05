@@ -124,7 +124,7 @@
 
         & img {
             flex-shrink: 0;
-            object-fit: cover;
+            object-fit: contain;
             width: 130px;
             height: 160px;
             border-radius: 24px !important; /* Override the Mercury border-radius */
