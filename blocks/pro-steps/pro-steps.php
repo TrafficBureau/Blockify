@@ -48,7 +48,12 @@ if (!empty($block['className'])) {
                     >
                 </div>
                 <div class="pro-block-step__counter">
-                    <?= str_pad($key, 2, '0', STR_PAD_LEFT); ?>
+                    <span class="desktop">
+                        <?= str_pad($key, 2, '0', STR_PAD_LEFT); ?>
+                    </span>
+                    <span class="mobile">
+                        <?= $key; ?>
+                    </span>
                 </div>
             </div>
             <div class="pro-block-step__content">

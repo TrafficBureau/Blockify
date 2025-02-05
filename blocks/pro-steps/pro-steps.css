@@ -85,6 +85,16 @@
     font-family: Montserrat, sans-serif;
     font-size: 200px;
     font-weight: 700;
+
+    & span {
+        &.desktop {
+            display: block;
+        }
+
+        &.mobile {
+            display: none;
+        }
+    }
 }
 
 .align-left .pro-block-step__counter {
@@ -224,6 +234,18 @@
         width: 100%;
     }
 
+    .pro-block-step__counter {
+        & span {
+            &.desktop {
+                display: none;
+            }
+
+            &.mobile {
+                display: block;
+            }
+        }
+    }
+
     .align-left .pro-block-step__media {
         justify-content: flex-end;
     }
@@ -236,12 +258,5 @@
     .align-right .pro-block-step__counter {
         right: 0;
         transform: translateY(-50%);
-    }
-}
-
-@media ( max-width: 375px ) {
-    .align-left .pro-block-step__counter {
-        left: auto;
-        right: 172px;
     }
 }
