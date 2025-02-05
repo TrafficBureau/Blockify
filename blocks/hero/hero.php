@@ -2,7 +2,9 @@
 
 $hero_title = get_field('hero_title');
 $hero_subtitle = get_field('hero_subtitle');
-$hero_image = get_field('hero_image') ?: blockify_get_file_url('/blocks/hero/hero.png');
+$hero_image = get_field('hero_image')
+    ? get_field('hero_image')['url']
+    : blockify_get_file_url('/blocks/hero/hero.png');
 $hero_color = get_field('hero_color') ?: '#ededed';
 
 ?>
