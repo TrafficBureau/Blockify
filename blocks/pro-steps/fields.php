@@ -43,7 +43,7 @@ function register_pro_steps_acf_fields()
                         'label' => 'Image',
                         'name' => 'image',
                         'type' => 'image',
-                        'required' => 0,
+                        'required' => 1,
                         'return_format' => 'array',
                         'preview_size' => 'thumbnail',
                         'library' => 'all',
