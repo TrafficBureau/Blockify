@@ -45,7 +45,7 @@ add_filter('pre_set_site_transient_update_plugins', function($transient) {
         $zip_url = 'https://api.github.com/repos/TrafficBureau/Blockify/zipball/main';
 
         $obj = new stdClass();
-        $obj->id          = 'blockify';
+        $obj->id          = $plugin_slug;
         $obj->slug        = 'traffic-bureau-blockify';
         $obj->plugin      = $plugin_slug;
         $obj->new_version = $remote_version;
