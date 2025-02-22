@@ -35,7 +35,7 @@ add_filter('pre_set_site_transient_update_plugins', function ($transient) {
 
     $remote_body = wp_remote_retrieve_body($response);
 
-    if (preg_match('/^ \* Version: (.*)$/mi', $remote_body, $matches)) {
+    if (preg_match('/^\s*\*\s*Version:\s*(.*)$/mi', $remote_body, $matches)) {
         $remote_version = trim($matches[1]);
     } else {
         return $transient;
@@ -59,27 +59,26 @@ add_filter('pre_set_site_transient_update_plugins', function ($transient) {
 }, 9999);
 
 add_filter('http_request_args', function ($args, $url) {
+    $token = defined('GITHUB_TOKEN_BLOCKIFY') ? GITHUB_TOKEN_BLOCKIFY : '';
+
     if ( strpos($url, 'api.github.com/repos/TrafficBureau/Blockify') !== false ) {
-        $args['headers']['Authorization'] = 'Bearer ' . GITHUB_TOKEN_BLOCKIFY;
+        $args['headers']['Authorization'] = 'Bearer ' . $token;
         $args['headers']['Accept'] = 'application/vnd.github.v3.raw';
     }
     return $args;
 }, 10, 2);
 
-add_filter('upgrader_source_selection', 'blockify_upgrader_source_selection', 10, 4);
-
-function blockify_upgrader_source_selection($source, $remote_source, $upgrader, $hook_extra)
+add_filter('upgrader_source_selection', function($source, $remote_source, $upgrader, $hook_extra)
 {
     if (isset($hook_extra['plugin']) && 'blockify/blockify.php' === $hook_extra['plugin'])
     {
         $path_parts = pathinfo( $source );
-        add_query_arg( 'blockify', 'true', $path_parts['dirname'] );
-        error_log('4 > Path parts: ' . print_r($path_parts, true));
         $newsource = trailingslashit( $path_parts['dirname'] ) . 'blockify/';
-        error_log('5 > New source: ' . $newsource);
         rename( $source, $newsource );
         return $newsource;
     }
 
     return $source;
-}
+}, 10, 4);
+
+
