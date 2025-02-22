@@ -73,3 +73,20 @@ add_filter('upgrader_package_options', function($options) {
 
     return $options;
 });
+
+add_filter('upgrader_source_selection', function($source, $remote_source, $upgrader, $hook_extra) {
+    global $wp_filesystem;
+
+    if (isset($hook_extra['plugin']) && 'blockify/blockify.php' === $hook_extra['plugin']) {
+        $desired_folder_name = 'blockify';
+        $folder_name = basename($source);
+
+        if ($folder_name === 'Blockify-main') {
+            $new_source = trailingslashit(dirname($source)) . $desired_folder_name;
+            $wp_filesystem->move($source, $new_source);
+            return $new_source;
+        }
+    }
+
+    return $source;
+}, 10, 4);
