@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Blockify
  * Description: A plugin adding custom blocks to the Gutenberg editor. Dependencies: Advanced Custom Fields.
- * Version: 0.0.2
+ * Version: 0.0.3
  * Author: Traffic Bureau
  * License: GPLv2 or later
  * Text Domain: blockify
