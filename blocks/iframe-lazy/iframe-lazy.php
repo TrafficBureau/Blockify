@@ -5,6 +5,10 @@
  * @var array $block
  */
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 $iframe = trim(get_field( 'block-iframe-lazy-content' ));
 $thumb_url = get_field( 'block-iframe-lazy-thumbnail' );
 

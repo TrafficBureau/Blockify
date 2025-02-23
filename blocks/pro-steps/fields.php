@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 add_action('acf/init', 'register_pro_steps_acf_fields');
 
 function register_pro_steps_acf_fields()

@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 $steps = get_field('pro_steps');
 $color = get_field('pro_steps_color') ?: '#e6e6e6';
 $background_color = get_field('pro_steps_background_color') ?: '#efefef';

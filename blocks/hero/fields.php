@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 add_action('acf/init', 'register_hero_acf_fields');
 
 function register_hero_acf_fields()
