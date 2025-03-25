@@ -35,7 +35,8 @@ if ( ! empty( $block['className'] ) ) {
 <?php if ( $iframe ) : ?>
 <div <?php echo $anchor; // phpcs:ignore ?> class="<?php echo esc_attr( $class_name ); ?>">
     <div class="wp-iframe-lazy-overlay">
-        <button class="wp-iframe-lazy-button" aria-label="Грати">Грати</button>
+        <button class="wp-iframe-lazy-button"><?php echo esc_html_x( 'Play', 'block-iframe-lazy', 'mercury-child' );
+        ?></button>
 
         <?php if ( $thumb_url ): ?>
             <img
