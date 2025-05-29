@@ -1,5 +1,7 @@
 <?php
 
+use TrafficBureau\Blockify\Hero\Options;
+
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -15,21 +17,21 @@ function register_hero_acf_fields()
             array(
                 'key' => 'field_hero_title',
                 'label' => 'Title',
-                'name' => 'hero_title',
+                'name' => Options::TITLE,
                 'type' => 'text',
                 'required' => 1,
             ),
             array(
                 'key' => 'field_hero_subtitle',
                 'label' => 'Subtitle',
-                'name' => 'hero_subtitle',
+                'name' => Options::SUBTITLE,
                 'type' => 'text',
-                'required' => 1,
+                'required' => 0,
             ),
             array(
                 'key' => 'field_hero_image',
                 'label' => 'Hero',
-                'name' => 'hero_image',
+                'name' => Options::HERO_IMAGE,
                 'type' => 'image',
                 'required' => 0,
                 'return_format' => 'array',
@@ -38,13 +40,56 @@ function register_hero_acf_fields()
                 'instructions' => 'Image size: 650x774. Not required.',
             ),
             array(
+                'key' => 'field_hero_title_color',
+                'label' => 'Title color',
+                'name' => Options::TITLE_COLOR,
+                'type' => 'color_picker',
+                'default_value' => '#000',
+                'enable_opacity' => false,
+            ),
+            array(
+                'key' => 'field_hero_subtitle_color',
+                'label' => 'Subtitle color',
+                'name' => Options::SUBTITLE_COLOR,
+                'type' => 'color_picker',
+                'default_value' => '#000',
+                'enable_opacity' => false,
+            ),
+            array(
                 'key' => 'field_hero_color',
                 'label' => 'Background color',
-                'name' => 'hero_color',
+                'name' => Options::BACKGROUND_COLOR,
                 'type' => 'color_picker',
-                'required' => 1,
                 'default_value' => '#ededed',
                 'enable_opacity' => false,
+            ),
+            array(
+                'key' => 'field_hero_color_gradient',
+                'label' => 'Second background color for gradient',
+                'name' => Options::COLOR_FOR_GRADIENT,
+                'type' => 'color_picker',
+                'default_value' => '#ededed',
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_hero_color_is_enabled_gradient',
+                            'operator' => '==',
+                            'value' => 1,
+                        ),
+                    ),
+                ),
+                'enable_opacity' => false,
+            ),
+            array(
+                'key' => 'field_hero_color_is_enabled_gradient',
+                'label' => 'Gradient background',
+                'name' => Options::IS_ENABLED_GRADIENT,
+                'type' => 'true_false',
+                'required' => 0,
+                'ui' => 1,
+                'ui_on_text' => 'On',
+                'ui_off_text' => 'Off',
+                'default_value' => 0,
             ),
             array(
                 'key' => 'field_hero_cards',
@@ -73,7 +118,7 @@ function register_hero_acf_fields()
                         'label' => 'Title',
                         'name' => 'title',
                         'type' => 'text',
-                        'required' => 1,
+                        'required' => 0,
                     ),
                     array(
                         'key' => 'field_hero_cards_text',

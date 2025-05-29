@@ -4,9 +4,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-add_action('wp_enqueue_scripts', 'blockify_enqueue_styles');
-
-function blockify_enqueue_styles()
+add_action('wp_enqueue_scripts', function()
 {
     wp_enqueue_style(
         'blockify-custom-style',
@@ -14,4 +12,4 @@ function blockify_enqueue_styles()
         array(),
         blockify_get_file_version('index.css', 'styles'),
     );
-}
+});

@@ -5,8 +5,13 @@ if (!defined('ABSPATH')) {
 }
 
 function register_fields($block) {
-    global $blockify_plugin_dir;
-    require_once $blockify_plugin_dir . '/blocks/' . $block . '/fields.php';
+    $options = blockify_get_dir('/blocks/' . $block . '/options.php');
+
+    if (file_exists($options)) {
+        require_once $options;
+    }
+
+    require_once blockify_get_dir('/blocks/' . $block . '/fields.php');
 }
 
 register_fields('hero');

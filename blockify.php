@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Blockify
  * Description: A plugin adding custom blocks to the Gutenberg editor. Dependencies: Advanced Custom Fields.
- * Version: 0.0.8
+ * Version: 0.0.9
  * Author: Traffic Bureau
  * License: GPLv2 or later
  * Text Domain: blockify
@@ -20,17 +20,26 @@ if (!defined('ABSPATH')) {
 
 global $blockify_version, $blockify_plugin_dir, $blockify_plugin_url;
 
-$blockify_version      = '0.0.8';
+$blockify_version      = '0.0.9';
 $blockify_plugin_dir   = untrailingslashit(plugin_dir_path(__FILE__));
 $blockify_plugin_url   = untrailingslashit(plugin_dir_url(__FILE__));
 $blockify_github_token = defined('GITHUB_TOKEN_BLOCKIFY') ? GITHUB_TOKEN_BLOCKIFY : '';
 
+/*  --- Constants  ---  */
+
+require_once $blockify_plugin_dir . '/constants/index.php';
+
 /*  --- Includes  ---  */
 
 require_once $blockify_plugin_dir . '/includes/helpers.php';
+require_once $blockify_plugin_dir . '/includes/hooks.php';
 require_once $blockify_plugin_dir . '/includes/styles.php';
 require_once $blockify_plugin_dir . '/includes/register-blocks.php';
 require_once $blockify_plugin_dir . '/includes/register-fields.php';
+
+/*  ---  Admin  ---  */
+
+require_once $blockify_plugin_dir . '/admin/index.php';
 
 /*  --- Updater (must be in the end)  ---  */
 

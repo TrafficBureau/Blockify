@@ -3,7 +3,7 @@
     --blockify-hero-font-family-title: 'Montserrat';
 
     --blockify-hero-text-color: #000;
-    --blockify-hero-background-color: #fff;
+    --blockify-hero-card-background-color: #fff;
 
     --blockify-hero-font-size-xl: 40px;
     --blockify-hero-font-size-l: 24px;
@@ -22,9 +22,10 @@
 
 .blockify-hero {
     position: relative;
+    content-visibility: visible !important; /* Override Mercury's content-visibility */
     margin-top: 150px;
     padding: 32px;
-    background-color: var(--blockify-hero-background-color-v2);
+    background-color: var(--blockify-hero-background-color);
     border-radius: 24px;
     font-family: var(--blockify-hero-font-family-main), sans-serif;
 
@@ -47,7 +48,7 @@
 
         & .title {
             margin: 0;
-            color: var(--blockify-hero-text-color);
+            color: var(--blockify-hero-title-color);
             font-family: var(--blockify-hero-font-family-title), sans-serif;
             font-size: var(--blockify-hero-font-size-xl);
             font-style: normal;
@@ -60,7 +61,7 @@
             align-items: center;
             gap: 12px;
             margin: 0;
-            color: var(--blockify-hero-text-color);
+            color: var(--blockify-hero-subtitle-color);
             font-family: inherit;
             font-size: var(--blockify-hero-font-size-l);
             font-style: normal;
@@ -73,7 +74,7 @@
                 display: block;
                 width: 32px;
                 height: 1px;
-                background-color: var(--blockify-hero-text-color);
+                background-color: var(--blockify-hero-subtitle-color);
             }
         }
     }
@@ -81,10 +82,12 @@
     & .cards {
         position: relative;
         z-index: 2;
-        margin-top: 40px;
+        margin: 40px 0 0;
+        padding: 0;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 24px;
+        list-style: none;
 
         @media (max-width: 950px) {
             margin-top: 0;
@@ -98,7 +101,7 @@
         gap: 24px;
         padding: 20px;
         border-radius: 24px;
-        background-color: var(--blockify-hero-background-color);
+        background-color: var(--blockify-hero-card-background-color);
         box-shadow:
             0 100px 80px 0 rgba(0, 0, 0, 0.07),
             0 41px 33px 0 rgba(0, 0, 0, 0.05),
@@ -122,12 +125,13 @@
             }
         }
 
-        & img {
+        & .image {
             flex-shrink: 0;
-            object-fit: contain;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 130px;
             height: 160px;
-            border-radius: 24px !important; /* Override the Mercury border-radius */
 
             @media (max-width: 950px) {
                 width: 90px;
@@ -135,12 +139,21 @@
             }
         }
 
-        & .content {
+        & img {
+            object-fit: contain;
+            width: 100%;
+            border-radius: 24px !important; /* Override the Mercury border-radius */
+        }
 
+        & .content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         & .title {
             margin: 0;
+            color: var(--blockify-hero-text-color);
             font-family: var(--blockify-hero-font-family-title), sans-serif;
             font-size: 18px;
             font-weight: 700;
@@ -148,8 +161,7 @@
         }
 
         & .text {
-            margin-top: 20px;
-            margin-bottom: 0;
+            margin: 0;
             color: var(--blockify-hero-text-color);
             font-family: inherit;
             font-size: var(--blockify-hero-font-size);
@@ -179,8 +191,8 @@
 
     .hero-image {
         position: absolute;
-        top: -150px;
-        right: -50px;
+        top: var(--blockify-hero-image-top, -150px);
+        right: var(--blockify-hero-image-right, -50px);
         z-index: 1;
         display: flex;
         max-width: 650px;

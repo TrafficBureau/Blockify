@@ -15,12 +15,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (total % 2 === 0) {
             for (let i = 0; i < 2; i++) {
-                const empty = document.createElement('div');
+                const empty = document.createElement('li');
                 empty.classList.add('card', 'empty');
                 container.insertBefore(empty, container.firstChild);
             }
         } else {
-            const empty = document.createElement('div');
+            const empty = document.createElement('li');
             empty.classList.add('card', 'empty');
             container.insertBefore(empty, cards[1] || null);
         }
