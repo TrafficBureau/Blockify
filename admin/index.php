@@ -40,7 +40,7 @@ function blockify_admin_page_content()
 }
 
 function update_blockify_hero_options() {
-    foreach (HeroOptions::CUSTOM_KEYS as $key) {
+    foreach (HeroOptions::GLOBAL_KEYS as $key) {
         $method = HeroOptions::UPDATE_METHODS[$key] ?? 'sanitize_text_field';
 
         if (in_array($key, HeroOptions::CHECKBOX_KEYS, true)) {

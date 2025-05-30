@@ -44,7 +44,7 @@ final class Options {
         self::IS_ENABLED_GRADIENT,
     ];
 
-    const CUSTOM_KEYS = [
+    const GLOBAL_KEYS = [
         self::SUBTITLE,
         self::HERO_IMAGE_ID,
         self::HERO_IMAGE_TOP,
