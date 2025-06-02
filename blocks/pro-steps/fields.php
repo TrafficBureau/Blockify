@@ -1,5 +1,7 @@
 <?php
 
+use TrafficBureau\Blockify\ProSteps\Options;
+
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -13,27 +15,35 @@ function register_pro_steps_acf_fields()
         'title' => 'Pro Steps Fields',
         'fields' => array(
             array(
-                'key' => 'field_pro_steps_color',
+                'key' => create_acf_key(Options::NUMBER_COLOR),
+                'name' => Options::NUMBER_COLOR,
                 'label' => 'Number color',
-                'name' => 'pro_steps_color',
                 'type' => 'color_picker',
                 'required' => 1,
-                'default_value' => '#e6e6e6',
+                'default_value' => Options::DEFAULTS[Options::NUMBER_COLOR],
                 'enable_opacity' => false,
             ),
             array(
-                'key' => 'field_pro_steps_background_color',
+                'key' => create_acf_key(Options::BACKGROUND_COLOR),
+                'name' => Options::BACKGROUND_COLOR,
                 'label' => 'Background color',
-                'name' => 'pro_steps_background_color',
                 'type' => 'color_picker',
                 'required' => 1,
-                'default_value' => '#efefef',
-                'enable_opacity' => false,
+                'default_value' => Options::DEFAULTS[Options::BACKGROUND_COLOR],
+                'enable_opacity' => true,
             ),
             array(
-                'key' => 'field_pro_steps',
+                'key' => create_acf_key(Options::COLOR_FOR_GRADIENT),
+                'name' => Options::COLOR_FOR_GRADIENT,
+                'label' => 'Second background color for gradient',
+                'type' => 'color_picker',
+                'default_value' => Options::DEFAULTS[Options::COLOR_FOR_GRADIENT],
+                'enable_opacity' => true,
+            ),
+            array(
+                'key' => create_acf_key(Options::STEPS),
+                'name' => Options::STEPS,
                 'label' => 'Steps',
-                'name' => 'pro_steps',
                 'type' => 'repeater',
                 'required' => 1,
                 'min' => 1,

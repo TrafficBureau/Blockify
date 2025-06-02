@@ -6,20 +6,16 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-function get_field_with_defaults(string $field_name) {
-    return blockify_get_field($field_name, Options::DEFAULTS);
-}
-
-$title               = get_field_with_defaults(Options::TITLE);
-$subtitle            = get_field_with_defaults(Options::SUBTITLE);
-$title_color         = get_field_with_defaults(Options::TITLE_COLOR);
-$subtitle_color      = get_field_with_defaults(Options::SUBTITLE_COLOR);
-$background_color    = get_field_with_defaults(Options::BACKGROUND_COLOR);
-$is_enabled_gradient = get_field_with_defaults(Options::IS_ENABLED_GRADIENT);
-$color_for_gradient  = get_field_with_defaults(Options::COLOR_FOR_GRADIENT);
-$hero_image_id       = get_field_with_defaults(Options::HERO_IMAGE_ID);
-$hero_image_top      = get_field_with_defaults(Options::HERO_IMAGE_TOP);
-$hero_image_right    = get_field_with_defaults(Options::HERO_IMAGE_RIGHT);
+$title               = Options::getFieldWithDefaults(Options::TITLE);
+$subtitle            = Options::getFieldWithDefaults(Options::SUBTITLE);
+$title_color         = Options::getFieldWithDefaults(Options::TITLE_COLOR);
+$subtitle_color      = Options::getFieldWithDefaults(Options::SUBTITLE_COLOR);
+$background_color    = Options::getFieldWithDefaults(Options::BACKGROUND_COLOR);
+$is_enabled_gradient = Options::getFieldWithDefaults(Options::IS_ENABLED_GRADIENT);
+$color_for_gradient  = Options::getFieldWithDefaults(Options::COLOR_FOR_GRADIENT);
+$hero_image_id       = Options::getFieldWithDefaults(Options::HERO_IMAGE_ID);
+$hero_image_top      = Options::getFieldWithDefaults(Options::HERO_IMAGE_TOP);
+$hero_image_right    = Options::getFieldWithDefaults(Options::HERO_IMAGE_RIGHT);
 $hero_image_field    = get_field(Options::HERO_IMAGE);
 $hero_image_alt      = $hero_image_field['alt'] ?? 'hero';
 $hero_image_url      = $hero_image_field['url'] ?? null;

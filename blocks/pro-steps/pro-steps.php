@@ -1,39 +1,34 @@
 <?php
 
+use TrafficBureau\Blockify\ProSteps\Options;
+
 if (!defined('ABSPATH')) {
     exit;
 }
 
-$steps = get_field('pro_steps');
-$color = get_field('pro_steps_color') ?: '#e6e6e6';
-$background_color = get_field('pro_steps_background_color') ?: '#efefef';
+$steps               = Options::getFieldWithDefaults(Options::STEPS);
+$number_color        = Options::getFieldWithDefaults(Options::NUMBER_COLOR);
+$background_color    = Options::getFieldWithDefaults(Options::BACKGROUND_COLOR );
+$color_for_gradient  = Options::getFieldWithDefaults(Options::COLOR_FOR_GRADIENT);
 
-$anchor = '';
-
-if (!empty($block['anchor'])) {
-    $anchor = 'id="' . esc_attr($block['anchor']) . '" ';
-}
-
-$class_name = 'pro-block-steps';
-
-if (!empty($block['className'])) {
-    $class_name .= ' ' . $block['className'];
-}
+$anchor     = !empty($block['anchor']) ? 'id="' . esc_attr($block['anchor']) . '" ' : '';
+$class_name = 'pro-block-steps' . (!empty($block['className']) ? ' ' . $block['className'] : '');
 
 ?>
 
 <style>
     :root {
-        --pro-steps-text-color: <?= $color ?> ;
+        --pro-steps-number-color: <?= $number_color ?> ;
         --pro-steps-background-color: <?= $background_color ?>;
+        --pro-color-for-gradient: <?= $color_for_gradient ?>;
     }
 </style>
 
-<section <?php echo $anchor; // phpcs:ignore ?> class="<?php echo esc_attr($class_name); ?>">
+<section <?= $anchor; // phpcs:ignore ?> class="<?= esc_attr($class_name); ?>">
     <?php foreach ($steps as $key => $step) :
         ++$key;
-    ?>
-        <div class="pro-block-step <?php echo $key % 2 === 0 ? 'align-right' : 'align-left'; ?>">
+        ?>
+        <div class="pro-block-step <?= $key % 2 === 0 ? 'align-right' : 'align-left'; ?>">
             <div class="pro-block-step__media">
                 <div class="pro-block-step__img-wrapper">
                     <img
@@ -44,8 +39,8 @@ if (!empty($block['className'])) {
                         height="457"
                     >
                     <img
-                        src="<?php echo $step['image']['url'] ?>"
-                        alt="Pro Step Image"
+                        src="<?= $step['image']['url'] ?>"
+                        alt="<?= esc_attr($step['image']['alt'] ?? 'Step image') ?>"
                         class="pro-block-step__img"
                         width="222"
                         height="457"
@@ -59,6 +54,14 @@ if (!empty($block['className'])) {
                         <?= $key; ?>
                     </span>
                 </div>
+                <svg class="pro-block-step__line" width="606" height="691" viewBox="0 0 606 691" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M123.772 2C-234.004 268.207 287.9 91.6696 519.661 323.251C760.42 563.825 436.219 624.265 166.805 689"
+                        stroke="#cccccc"
+                        stroke-width="3"
+                        stroke-dasharray="12 12"
+                    />
+                </svg>
             </div>
             <div class="pro-block-step__content">
                 <div class="pro-block-step__title">

@@ -140,3 +140,16 @@ if (!function_exists('expand_short_hex')) {
         return $color;
     }
 }
+
+if (!function_exists('create_acf_key')) {
+    /**
+     * Створює унікальний ключ для ACF поля
+     *
+     * @param string $name Назва поля
+     * @return string Унікальний ключ
+     */
+    function create_acf_key(string $name): string
+    {
+        return 'field_' . sanitize_title_with_dashes($name, '', 'save');
+    }
+}

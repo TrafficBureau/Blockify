@@ -55,4 +55,8 @@ final class Options {
         self::IS_ENABLED_GRADIENT,
         self::COLOR_FOR_GRADIENT,
     ];
+
+    public static function getFieldWithDefaults($field_name) {
+        return blockify_get_field($field_name, self::DEFAULTS);
+    }
 }
