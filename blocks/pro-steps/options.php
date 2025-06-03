@@ -7,9 +7,9 @@ if (!defined('ABSPATH')) {
 }
 
 final class Options {
-    const STEPS               = 'blockify_pro_steps';
-    const NUMBER_COLOR        = 'blockify_pro_steps_number_color';
-    const BACKGROUND_COLOR    = 'blockify_pro_steps_background_color';
+    const STEPS               = 'pro_steps';                  // without "blockify_" for backward compatibility
+    const NUMBER_COLOR        = 'pro_steps_color';            // the same
+    const BACKGROUND_COLOR    = 'pro_steps_background_color'; // the same
     const COLOR_FOR_GRADIENT  = 'blockify_pro_steps_color_for_gradient';
 
     const DEFAULTS = [
