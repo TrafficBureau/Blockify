@@ -26,14 +26,16 @@ $class_name    = 'pro-block-steps' . (!empty($block['className']) ? ' ' . $block
     }
 </style>
 
-<section <?= $anchor; // phpcs:ignore ?> class="<?= esc_attr($class_name); ?>">
+<section <?= $anchor; // phpcs:ignore ?> class="<?= esc_attr($class_name); ?>" itemscope itemtype="https://schema.org/HowTo">
+    <meta itemprop="name" content="" id="howto-block-name-meta">
     <ol>
     <?php foreach ($steps as $key => $step) :
         ++$key;
         $is_last = $key === count($steps) - 1;
         $is_even = $key % 2 === 0;
         ?>
-        <li class="pro-block-step <?= $is_even ? 'align-right' : 'align-left'; ?>">
+        <li class="pro-block-step <?= $is_even ? 'align-right' : 'align-left'; ?>" itemscope itemtype="https://schema.org/HowToStep" itemprop="step">
+            <meta itemprop="position" content="<?= $key ?>">
             <div class="pro-block-step__media">
                 <div class="pro-block-step__img-wrapper">
                     <img
@@ -49,6 +51,7 @@ $class_name    = 'pro-block-steps' . (!empty($block['className']) ? ' ' . $block
                         class="pro-block-step__img"
                         width="222"
                         height="457"
+                        itemprop="image"
                     >
                 </div>
                 <div class="pro-block-step__counter">
@@ -78,10 +81,10 @@ $class_name    = 'pro-block-steps' . (!empty($block['className']) ? ' ' . $block
                 <?php endif; ?>
             </div>
             <div class="pro-block-step__content">
-                <div class="pro-block-step__title">
+                <div class="pro-block-step__title" itemprop="name">
                     <?= $step['title'] ?>
                 </div>
-                <div class="pro-block-step__text">
+                <div class="pro-block-step__text" itemprop="text">
                     <?= $step['text'] ?>
                 </div>
             </div>
@@ -89,3 +92,20 @@ $class_name    = 'pro-block-steps' . (!empty($block['className']) ? ' ' . $block
     <?php endforeach; ?>
     </ol>
 </section>
+<script>
+(function() {
+    const section = document.querySelector('.pro-block-steps[itemtype="https://schema.org/HowTo"]');
+    if (!section) return;
+    let node = section.previousElementSibling;
+    let found = '';
+    while(node && !found) {
+        if (node.matches && (node.matches('h2') || node.matches('h3') || node.matches('h4'))) {
+            found = node.textContent.trim();
+        }
+        node = node.previousElementSibling;
+    }
+    if (found) {
+        document.getElementById('howto-block-name-meta').setAttribute('content', found);
+    }
+})();
+</script>
