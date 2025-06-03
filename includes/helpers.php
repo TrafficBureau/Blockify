@@ -153,3 +153,25 @@ if (!function_exists('create_acf_key')) {
         return 'field_' . sanitize_title_with_dashes($name, '', 'save');
     }
 }
+
+if (!function_exists('sanitize_any_color')) {
+    /**
+     * Синтаксична перевірка кольору, дозволяє hex (#xxxxxx) або rgba()
+     *
+     * @param string $value Значення кольору
+     * @return string Повертає значення кольору, якщо воно коректне, інакше порожній рядок
+     */
+    function sanitize_any_color(string $value): string {
+        $value = trim($value);
+
+        if (preg_match('/^#[0-9a-fA-F]{6,8}$/', $value)) {
+            return $value;
+        }
+
+        if (preg_match('/^rgba?\([^)]+\)$/', $value)) {
+            return $value;
+        }
+
+        return '';
+    }
+}

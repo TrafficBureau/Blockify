@@ -10,9 +10,11 @@ $steps               = Options::getFieldWithDefaults(Options::STEPS);
 $number_color        = Options::getFieldWithDefaults(Options::NUMBER_COLOR);
 $background_color    = Options::getFieldWithDefaults(Options::BACKGROUND_COLOR );
 $color_for_gradient  = Options::getFieldWithDefaults(Options::COLOR_FOR_GRADIENT);
+$line_color          = Options::getFieldWithDefaults(Options::LINE_COLOR);
 
-$anchor     = !empty($block['anchor']) ? 'id="' . esc_attr($block['anchor']) . '" ' : '';
-$class_name = 'pro-block-steps' . (!empty($block['className']) ? ' ' . $block['className'] : '');
+$is_even_steps = count($steps) % 2 === 0;
+$anchor        = !empty($block['anchor']) ? 'id="' . esc_attr($block['anchor']) . '" ' : '';
+$class_name    = 'pro-block-steps' . (!empty($block['className']) ? ' ' . $block['className'] : '');
 
 ?>
 
@@ -25,10 +27,13 @@ $class_name = 'pro-block-steps' . (!empty($block['className']) ? ' ' . $block['c
 </style>
 
 <section <?= $anchor; // phpcs:ignore ?> class="<?= esc_attr($class_name); ?>">
+    <ol>
     <?php foreach ($steps as $key => $step) :
         ++$key;
+        $is_last = $key === count($steps) - 1;
+        $is_even = $key % 2 === 0;
         ?>
-        <div class="pro-block-step <?= $key % 2 === 0 ? 'align-right' : 'align-left'; ?>">
+        <li class="pro-block-step <?= $is_even ? 'align-right' : 'align-left'; ?>">
             <div class="pro-block-step__media">
                 <div class="pro-block-step__img-wrapper">
                     <img
@@ -54,14 +59,23 @@ $class_name = 'pro-block-steps' . (!empty($block['className']) ? ' ' . $block['c
                         <?= $key; ?>
                     </span>
                 </div>
-                <svg class="pro-block-step__line" width="606" height="691" viewBox="0 0 606 691" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M123.772 2C-234.004 268.207 287.9 91.6696 519.661 323.251C760.42 563.825 436.219 624.265 166.805 689"
-                        stroke="#cccccc"
-                        stroke-width="3"
-                        stroke-dasharray="12 12"
-                    />
-                </svg>
+                <?php if (!$is_even) : ?>
+                    <svg
+                        class="pro-block-step__line <?= $is_last && $is_even_steps ? 'half-line' : ''; ?>"
+                        width="606"
+                        height="691"
+                        viewBox="0 0 606 691"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M123.772 2C-234.004 268.207 287.9 91.6696 519.661 323.251C760.42 563.825 436.219 624.265 166.805 689"
+                            stroke="<?= $line_color ?>"
+                            stroke-width="3"
+                            stroke-dasharray="12 12"
+                        />
+                    </svg>
+                <?php endif; ?>
             </div>
             <div class="pro-block-step__content">
                 <div class="pro-block-step__title">
@@ -71,6 +85,7 @@ $class_name = 'pro-block-steps' . (!empty($block['className']) ? ' ' . $block['c
                     <?= $step['text'] ?>
                 </div>
             </div>
-        </div>
+        </li>
     <?php endforeach; ?>
+    </ol>
 </section>

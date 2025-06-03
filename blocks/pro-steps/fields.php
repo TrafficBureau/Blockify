@@ -19,7 +19,6 @@ function register_pro_steps_acf_fields()
                 'name' => Options::NUMBER_COLOR,
                 'label' => 'Number color',
                 'type' => 'color_picker',
-                'required' => 1,
                 'enable_opacity' => false,
             ),
             array(
@@ -27,7 +26,6 @@ function register_pro_steps_acf_fields()
                 'name' => Options::BACKGROUND_COLOR,
                 'label' => 'Background color',
                 'type' => 'color_picker',
-                'required' => 1,
                 'enable_opacity' => true,
             ),
             array(
@@ -36,6 +34,13 @@ function register_pro_steps_acf_fields()
                 'label' => 'Second background color for gradient',
                 'type' => 'color_picker',
                 'enable_opacity' => true,
+            ),
+            array(
+                'key' => create_acf_key(Options::LINE_COLOR),
+                'name' => Options::LINE_COLOR,
+                'label' => 'Line color',
+                'type' => 'color_picker',
+                'enable_opacity' => false,
             ),
             array(
                 'key' => create_acf_key(Options::STEPS),

@@ -2,6 +2,7 @@
 
 use TrafficBureau\Blockify\Admin\Nonce;
 use TrafficBureau\Blockify\Hero\Options as HeroOptions;
+use TrafficBureau\Blockify\ProSteps\Options as ProStepsOptions;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -30,6 +31,10 @@ function blockify_admin_page_content()
         update_blockify_hero_options();
     }
 
+    if (blockify_check_post_request(Nonce::PRO_STEPS)) {
+        update_blockify_pro_steps_options();
+    }
+
     $file_path = blockify_get_dir('/admin/templates/index.php');
 
     if (file_exists($file_path)) {
@@ -48,6 +53,17 @@ function update_blockify_hero_options() {
         } else {
             $value = isset($_POST[$key]) ? call_user_func($method, $_POST[$key]) : HeroOptions::DEFAULTS[$key];
         }
+
+        update_option($key, $value);
+    }
+
+    echo '<div class="updated"><p>Налаштування збережено</p></div>';
+}
+
+function update_blockify_pro_steps_options() {
+    foreach (ProStepsOptions::GLOBAL_KEYS as $key) {
+        $method = ProStepsOptions::UPDATE_METHODS[$key] ?? 'sanitize_text_field';
+        $value = isset($_POST[$key]) ? call_user_func($method, $_POST[$key]) : ProStepsOptions::DEFAULTS[$key];
 
         update_option($key, $value);
     }
