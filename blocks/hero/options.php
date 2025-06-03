@@ -7,15 +7,15 @@ if (!defined('ABSPATH')) {
 }
 
 final class Options {
-    const TITLE               = 'blockify_hero_title';
-    const SUBTITLE            = 'blockify_hero_subtitle';
-    const HERO_IMAGE          = 'blockify_hero_image';
+    const TITLE               = 'hero_title';    // without "blockify_" for backward compatibility
+    const SUBTITLE            = 'hero_subtitle'; // the same
+    const HERO_IMAGE          = 'hero_image';    // the same
     const HERO_IMAGE_ID       = 'blockify_hero_image_id';
     const HERO_IMAGE_TOP      = 'blockify_hero_image_top';
     const HERO_IMAGE_RIGHT    = 'blockify_hero_image_right';
     const TITLE_COLOR         = 'blockify_hero_title_color';
     const SUBTITLE_COLOR      = 'blockify_hero_subtitle_color';
-    const BACKGROUND_COLOR    = 'blockify_hero_background_color';
+    const BACKGROUND_COLOR    = 'hero_color'; // must be "blockify_hero_background_color" but for backward compatibility left as "hero_color"
     const IS_ENABLED_GRADIENT = 'blockify_hero_is_enabled_gradient';
     const COLOR_FOR_GRADIENT  = 'blockify_hero_color_for_gradient';
 
