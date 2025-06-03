@@ -21,7 +21,7 @@ $hero_image_alt      = $hero_image_field['alt'] ?? 'hero';
 $hero_image_url      = $hero_image_field['url'] ?? null;
 
 if (empty($hero_image_url) && !empty($hero_image_id)) {
-    $hero_image_url = wp_get_attachment_image_url($hero_image_id, 'medium');
+    $hero_image_url = wp_get_attachment_image_url($hero_image_id, 'full');
 }
 
 if (empty($hero_image_url)) {
