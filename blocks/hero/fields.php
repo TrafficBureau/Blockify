@@ -44,7 +44,6 @@ function register_hero_acf_fields()
                 'label' => 'Title color',
                 'name' => Options::TITLE_COLOR,
                 'type' => 'color_picker',
-                'default_value' => '#000',
                 'enable_opacity' => false,
             ),
             array(
@@ -52,7 +51,6 @@ function register_hero_acf_fields()
                 'label' => 'Subtitle color',
                 'name' => Options::SUBTITLE_COLOR,
                 'type' => 'color_picker',
-                'default_value' => '#000',
                 'enable_opacity' => false,
             ),
             array(
@@ -60,7 +58,6 @@ function register_hero_acf_fields()
                 'label' => 'Background color',
                 'name' => Options::BACKGROUND_COLOR,
                 'type' => 'color_picker',
-                'default_value' => '#ededed',
                 'enable_opacity' => false,
             ),
             array(
@@ -68,7 +65,6 @@ function register_hero_acf_fields()
                 'label' => 'Second background color for gradient',
                 'name' => Options::COLOR_FOR_GRADIENT,
                 'type' => 'color_picker',
-                'default_value' => '#ededed',
                 'conditional_logic' => array(
                     array(
                         array(
