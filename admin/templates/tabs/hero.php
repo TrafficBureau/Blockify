@@ -6,12 +6,12 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$subtitle         = get_option(Options::SUBTITLE, Options::DEFAULTS[Options::SUBTITLE]);
-$hero_image_id    = get_option(Options::HERO_IMAGE_ID, Options::DEFAULTS[Options::HERO_IMAGE_ID]);
+$subtitle         = Options::getFieldWithDefaults(Options::SUBTITLE);
+$hero_image_id    = Options::getFieldWithDefaults(Options::HERO_IMAGE_ID);
 $hero_image_url   = $hero_image_id ? wp_get_attachment_image_url($hero_image_id, 'medium') : '';
-$hero_image_top   = get_option(Options::HERO_IMAGE_TOP, Options::DEFAULTS[ Options::HERO_IMAGE_TOP]);
-$hero_image_right = get_option(Options::HERO_IMAGE_RIGHT, Options::DEFAULTS[ Options::HERO_IMAGE_RIGHT]);
-$title_color      = get_option(Options::TITLE_COLOR, Options::DEFAULTS[Options::TITLE_COLOR]);
+$hero_image_top   = Options::getFieldWithDefaults(Options::HERO_IMAGE_TOP);
+$hero_image_right = Options::getFieldWithDefaults(Options::HERO_IMAGE_RIGHT);
+$title_color      = Options::getFieldWithDefaults(Options::TITLE_COLOR);
 
 ?>
 
@@ -188,7 +188,7 @@ $title_color      = get_option(Options::TITLE_COLOR, Options::DEFAULTS[Options::
         <td>
             <button
                 type="button"
-                class="button"
+                class="button button-secondary"
                 id="reset-hero-settings"
             >Скинути</button>
             <p class="description">Після скидання необхідно зберегти зміни, щоб застосувати стандартні значення</p>
