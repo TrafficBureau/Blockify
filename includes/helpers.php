@@ -12,7 +12,7 @@ if (!function_exists('blockify_get_file_version')) {
      */
     function blockify_get_file_version(string $file_path, string $type = null): string
     {
-        global $blockify_is_dev, $blockify_plugin_dir, $blockify_plugin_url, $blockify_version;
+        global $blockify_is_dev, $blockify_plugin_dir, $blockify_version;
 
         if (is_null($type)) {
             return $blockify_is_dev
