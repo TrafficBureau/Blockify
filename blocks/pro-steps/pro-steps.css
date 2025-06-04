@@ -15,7 +15,7 @@
 }
 
 .pro-block-step {
-    --couter-number-offset: 60px;
+    --counter-number-offset: 60px;
     --media-side-offset: 170px;
 
     display: flex;
@@ -62,7 +62,7 @@
         }
 
         & .pro-block-step__counter {
-            left: calc(var(--couter-number-offset) * -1);
+            left: calc(var(--counter-number-offset) * -1);
             transform: translateY(-50%) translateX(-100%);
         }
     }
@@ -81,7 +81,7 @@
         }
 
         & .pro-block-step__counter {
-            right: calc(var(--couter-number-offset) * -1);
+            right: calc(var(--counter-number-offset) * -1);
             transform: translateY(-50%) translateX(100%);
         }
     }
@@ -160,7 +160,7 @@
 
 @media (max-width: 1340px) and (min-width: 1200px) {
     .pro-block-step {
-        --couter-number-offset: clamp(40px, -131px + 14vw, 60px);
+        --counter-number-offset: clamp(40px, -131px + 14vw, 60px);
         --media-side-offset: clamp(170px, 649px + -36vw, 220px);
 
         gap: clamp(80px, -91px + 14.2857vw, 100px);
@@ -172,11 +172,11 @@
         gap: clamp(48px, -16px + 8vw, 80px);
 
         &.align-left {
-            --couter-number-offset: clamp(10px, -50px + 7.5vw, 40px);
+            --counter-number-offset: clamp(10px, -50px + 7.5vw, 40px);
         }
 
         &.align-right {
-            --couter-number-offset: clamp(-80px, -320px + 30vw, 40px);
+            --counter-number-offset: clamp(-80px, -320px + 30vw, 40px);
 
             & .pro-block-step__line {
                 transform: translateY(calc(clamp(150px, 90px + 7.5vw, 180px) * -1));
@@ -235,7 +235,7 @@
         gap: clamp(24px, -26px + 9.2308vw, 48px);
 
         &.align-right {
-            --couter-number-offset: -50px;
+            --counter-number-offset: -50px;
         }
 
         & .pro-block-step__media {
