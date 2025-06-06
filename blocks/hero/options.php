@@ -22,8 +22,8 @@ final class Options {
     const DEFAULTS = [
         self::SUBTITLE            => '',
         self::HERO_IMAGE_ID       => '',
-        self::HERO_IMAGE_TOP      => -50,
-        self::HERO_IMAGE_RIGHT    => -150,
+        self::HERO_IMAGE_TOP      => -150,
+        self::HERO_IMAGE_RIGHT    => -50,
         self::TITLE_COLOR         => '#000',
         self::SUBTITLE_COLOR      => '#000',
         self::BACKGROUND_COLOR    => '#ededed',
