@@ -20,15 +20,15 @@ final class Options {
     const COLOR_FOR_GRADIENT  = 'blockify_hero_color_for_gradient';
 
     const DEFAULTS = [
-        self::SUBTITLE          => '',
-        self::HERO_IMAGE_ID     => '',
-        self::HERO_IMAGE_TOP    => -50,
-        self::HERO_IMAGE_RIGHT  => -150,
-        self::TITLE_COLOR       => '#000',
-        self::SUBTITLE_COLOR    => '#000',
-        self::BACKGROUND_COLOR  => '#ededed',
+        self::SUBTITLE            => '',
+        self::HERO_IMAGE_ID       => '',
+        self::HERO_IMAGE_TOP      => -50,
+        self::HERO_IMAGE_RIGHT    => -150,
+        self::TITLE_COLOR         => '#000',
+        self::SUBTITLE_COLOR      => '#000',
+        self::BACKGROUND_COLOR    => '#ededed',
         self::IS_ENABLED_GRADIENT => 1,
-        self::COLOR_FOR_GRADIENT => '#ededed',
+        self::COLOR_FOR_GRADIENT  => '#ededed',
     ];
 
     const UPDATE_METHODS = [
