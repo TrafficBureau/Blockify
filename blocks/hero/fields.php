@@ -40,6 +40,18 @@ function register_hero_acf_fields()
                 'instructions' => 'Image size: 650x774. Not required.',
             ),
             array(
+                'key' => create_acf_key(Options::HERO_IMAGE_TOP),
+                'name' => Options::HERO_IMAGE_TOP,
+                'label' => 'Hero image top',
+                'type' => 'number',
+            ),
+            array(
+                'key' => create_acf_key(Options::HERO_IMAGE_RIGHT),
+                'name' => Options::HERO_IMAGE_RIGHT,
+                'label' => 'Hero image right',
+                'type' => 'number',
+            ),
+            array(
                 'key' => create_acf_key(Options::TITLE_COLOR),
                 'name' => Options::TITLE_COLOR,
                 'label' => 'Title color',
