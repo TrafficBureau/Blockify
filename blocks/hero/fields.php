@@ -42,14 +42,20 @@ function register_hero_acf_fields()
             array(
                 'key' => create_acf_key(Options::HERO_IMAGE_TOP),
                 'name' => Options::HERO_IMAGE_TOP,
-                'label' => 'Hero image top',
+                'label' => 'Hero image top (px)',
                 'type' => 'number',
+                'wrapper' => array(
+                    'width' => 25,
+                ),
             ),
             array(
                 'key' => create_acf_key(Options::HERO_IMAGE_RIGHT),
                 'name' => Options::HERO_IMAGE_RIGHT,
-                'label' => 'Hero image right',
+                'label' => 'Hero image right (px)',
                 'type' => 'number',
+                'wrapper' => array(
+                    'width' => 25,
+                ),
             ),
             array(
                 'key' => create_acf_key(Options::TITLE_COLOR),
