@@ -118,13 +118,13 @@ if (!function_exists('blockify_get_field')) {
     {
         $local = get_field($option_name); // Get the value from the local ACF field first
 
-        if ($local !== null && $local !== '') {
+        if (!empty($local) || $local === '0') {
             return $local;
         }
 
         $global = get_option($option_name);
 
-        if ($global !== null && $global !== '') {
+        if (!empty($global) || $global === '0') {
             return $global;
         }
 
