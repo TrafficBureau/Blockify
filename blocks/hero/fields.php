@@ -85,7 +85,7 @@ function register_hero_acf_fields()
                 'ui' => 1,
                 'ui_on_text' => 'On',
                 'ui_off_text' => 'Off',
-                'default_value' => 0,
+                'default_value' => 1,
             ),
             array(
                 'key' => 'field_hero_cards',

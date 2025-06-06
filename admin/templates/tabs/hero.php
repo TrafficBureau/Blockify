@@ -155,30 +155,14 @@ $title_color      = Options::getFieldWithDefaults(Options::TITLE_COLOR);
                 type="color"
                 id="<?= Options::COLOR_FOR_GRADIENT ?>"
                 name="<?= Options::COLOR_FOR_GRADIENT ?>"
-                value="<?= esc_attr(get_option(Options::COLOR_FOR_GRADIENT, '#ededed')); ?>"
+                value="<?= esc_attr(get_option(Options::COLOR_FOR_GRADIENT, Options::DEFAULTS[Options::COLOR_FOR_GRADIENT])); ?>"
                 style="vertical-align: middle;"
                 data-default="<?= esc_attr(expand_short_hex(Options::DEFAULTS[Options::COLOR_FOR_GRADIENT])) ?>"
             />
             <p class="description">
                 Цей колір буде використовуватися як другий колір для градієнту фону
-                <br>Буде використовуватися лише якщо увімкнено "Градієнт фону"
+                <br>Буде застосовуватися лише якщо в блоці увімкнено "Градієнт фону"
             </p>
-        </td>
-    </tr>
-    <tr>
-        <th scope="row">
-            <label for="<?= Options::IS_ENABLED_GRADIENT ?>">Градієнт фону:</label>
-        </th>
-        <td>
-            <input
-                type="checkbox"
-                id="<?= Options::IS_ENABLED_GRADIENT ?>"
-                name="<?= Options::IS_ENABLED_GRADIENT ?>"
-                value="1"
-                <?= get_option(Options::IS_ENABLED_GRADIENT) ? 'checked' : ''; ?>
-                data-default="<?= esc_attr(Options::DEFAULTS[Options::IS_ENABLED_GRADIENT]) ?>"
-            />
-            <label for="<?= Options::IS_ENABLED_GRADIENT ?>">Увімкнути градієнт</label>
         </td>
     </tr>
     <tr>
