@@ -167,6 +167,21 @@ $title_color      = Options::getFieldWithDefaults(Options::TITLE_COLOR);
     </tr>
     <tr>
         <th scope="row">
+            <label for="<?= Options::IS_ENABLED_GRADIENT ?>">Увімкнути градієнт:</label>
+        </th>
+        <td>
+            <input
+                type="checkbox"
+                id="<?= Options::IS_ENABLED_GRADIENT ?>"
+                name="<?= Options::IS_ENABLED_GRADIENT ?>"
+                value="1"
+                <?= checked(get_option(Options::IS_ENABLED_GRADIENT, Options::DEFAULTS[Options::IS_ENABLED_GRADIENT]), 1, false); ?>
+                data-default="<?= esc_attr(Options::DEFAULTS[Options::IS_ENABLED_GRADIENT]) ?>"
+            />
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
             <label for="reset-hero-settings">Скинути на стандартні налаштування:</label>
         </th>
         <td>

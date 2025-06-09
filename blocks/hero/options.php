@@ -18,6 +18,7 @@ final class Options {
     const BACKGROUND_COLOR    = 'hero_color'; // must be "blockify_hero_background_color" but for backward compatibility left as "hero_color"
     const IS_ENABLED_GRADIENT = 'blockify_hero_is_enabled_gradient';
     const COLOR_FOR_GRADIENT  = 'blockify_hero_color_for_gradient';
+    const USE_GLOBAL_OPTIONS  = 'blockify_hero_use_global_options';
 
     const DEFAULTS = [
         self::SUBTITLE            => '',
@@ -29,6 +30,7 @@ final class Options {
         self::BACKGROUND_COLOR    => '#ededed',
         self::IS_ENABLED_GRADIENT => 1,
         self::COLOR_FOR_GRADIENT  => '#ededed',
+        self::USE_GLOBAL_OPTIONS  => 0,
     ];
 
     const UPDATE_METHODS = [
@@ -42,7 +44,9 @@ final class Options {
         self::COLOR_FOR_GRADIENT => 'sanitize_hex_color',
     ];
 
-    const CHECKBOX_KEYS = [];
+    const CHECKBOX_KEYS = [
+        self::IS_ENABLED_GRADIENT,
+    ];
 
     const GLOBAL_KEYS = [
         self::SUBTITLE,
@@ -53,9 +57,16 @@ final class Options {
         self::SUBTITLE_COLOR,
         self::BACKGROUND_COLOR,
         self::COLOR_FOR_GRADIENT,
+        self::IS_ENABLED_GRADIENT,
     ];
 
     public static function getFieldWithDefaults($field_name) {
+        $use_global = get_field(self::USE_GLOBAL_OPTIONS);
+
+        if ($use_global) {
+            return blockify_get_field_global_first($field_name, self::DEFAULTS);
+        }
+
         return blockify_get_field($field_name, self::DEFAULTS);
     }
 }

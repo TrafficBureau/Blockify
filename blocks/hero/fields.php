@@ -15,6 +15,16 @@ function register_hero_acf_fields()
         'title' => 'Hero Fields',
         'fields' => array(
             array(
+                'key' => create_acf_key(Options::USE_GLOBAL_OPTIONS),
+                'name' => Options::USE_GLOBAL_OPTIONS,
+                'label' => 'Use global options',
+                'type' => 'true_false',
+                'ui' => 1,
+                'ui_on_text' => 'On',
+                'ui_off_text' => 'Off',
+                'default_value' => 0,
+            ),
+            array(
                 'key' => create_acf_key(Options::TITLE),
                 'name' => Options::TITLE,
                 'label' => 'Title',
