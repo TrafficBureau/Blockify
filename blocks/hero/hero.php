@@ -16,12 +16,19 @@ $color_for_gradient  = Options::getFieldWithDefaults(Options::COLOR_FOR_GRADIENT
 $hero_image_id       = Options::getFieldWithDefaults(Options::HERO_IMAGE_ID);
 $hero_image_top      = Options::getFieldWithDefaults(Options::HERO_IMAGE_TOP);
 $hero_image_right    = Options::getFieldWithDefaults(Options::HERO_IMAGE_RIGHT);
-$hero_image_field    = get_field(Options::HERO_IMAGE);
-$hero_image_alt      = $hero_image_field['alt'] ?? 'hero';
-$hero_image_url      = $hero_image_field['url'] ?? null;
+$hero_image_field = get_field(Options::HERO_IMAGE);
+$hero_image_alt   = $hero_image_field['alt'] ?? null;
+$hero_image_url   = $hero_image_field['url'] ?? null;
 
 if (empty($hero_image_url) && !empty($hero_image_id)) {
     $hero_image_url = wp_get_attachment_image_url($hero_image_id, 'full');
+    if ($hero_image_alt === null) {
+        $hero_image_alt = get_post_meta($hero_image_id, '_wp_attachment_image_alt', true) ?: null;
+    }
+}
+
+if ($hero_image_alt === null) {
+    $hero_image_alt = 'hero';
 }
 
 if (empty($hero_image_url)) {
