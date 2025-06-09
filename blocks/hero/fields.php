@@ -15,6 +15,13 @@ function register_hero_acf_fields()
         'title' => 'Hero Fields',
         'fields' => array(
             array(
+                'key' => create_acf_key(Options::TITLE),
+                'name' => Options::TITLE,
+                'label' => 'Title',
+                'type' => 'text',
+                'required' => 1,
+            ),
+            array(
                 'key' => create_acf_key(Options::USE_GLOBAL_OPTIONS),
                 'name' => Options::USE_GLOBAL_OPTIONS,
                 'label' => 'Use global options',
@@ -22,14 +29,7 @@ function register_hero_acf_fields()
                 'ui' => 1,
                 'ui_on_text' => 'On',
                 'ui_off_text' => 'Off',
-                'default_value' => 0,
-            ),
-            array(
-                'key' => create_acf_key(Options::TITLE),
-                'name' => Options::TITLE,
-                'label' => 'Title',
-                'type' => 'text',
-                'required' => 1,
+                'default_value' => 1,
             ),
             array(
                 'key' => create_acf_key(Options::SUBTITLE),
