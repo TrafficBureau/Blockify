@@ -24,11 +24,11 @@ function register_hero_acf_fields()
             array(
                 'key' => create_acf_key(Options::USE_GLOBAL_OPTIONS),
                 'name' => Options::USE_GLOBAL_OPTIONS,
-                'label' => 'Use global options',
+                'label' => 'Use global options first',
                 'type' => 'true_false',
                 'ui' => 1,
-                'ui_on_text' => 'On',
-                'ui_off_text' => 'Off',
+                'ui_on_text' => 'Yes',
+                'ui_off_text' => 'No',
                 'default_value' => 1,
             ),
             array(
