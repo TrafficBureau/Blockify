@@ -161,8 +161,23 @@ $title_color      = Options::getFieldWithDefaults(Options::TITLE_COLOR);
             />
             <p class="description">
                 Цей колір буде використовуватися як другий колір для градієнту фону
-                <br>Буде застосовуватися лише якщо в блоці увімкнено "Градієнт фону"
+                <br>Буде застосовуватися лише якщо увімкнено параметр "Увімкнути градієнт"
             </p>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            <label for="<?= Options::IS_ENABLED_GRADIENT ?>">Увімкнути градієнт:</label>
+        </th>
+        <td>
+            <input
+                type="checkbox"
+                id="<?= Options::IS_ENABLED_GRADIENT ?>"
+                name="<?= Options::IS_ENABLED_GRADIENT ?>"
+                value="1"
+                <?= checked(get_option(Options::IS_ENABLED_GRADIENT, Options::DEFAULTS[Options::IS_ENABLED_GRADIENT]), 1, false); ?>
+                data-default="<?= esc_attr(Options::DEFAULTS[Options::IS_ENABLED_GRADIENT]) ?>"
+            />
         </td>
     </tr>
     <tr>

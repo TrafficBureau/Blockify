@@ -114,8 +114,8 @@ if (!function_exists('blockify_get_field')) {
      *
      * @return mixed
      */
-    function blockify_get_field(string $option_name, array $defaults)
-    {
+function blockify_get_field(string $option_name, array $defaults)
+{
         $local = get_field($option_name); // Get the value from the local ACF field first
 
         if (!empty($local) || $local === '0') {
@@ -126,6 +126,33 @@ if (!function_exists('blockify_get_field')) {
 
         if (!empty($global) || $global === '0') {
             return $global;
+        }
+
+        return $defaults[$option_name] ?? null;
+    }
+}
+
+if (!function_exists('blockify_get_field_global_first')) {
+    /**
+     * Отримує значення поля з пріоритетом: глобальне > локальне > дефолтне
+     *
+     * @param string $option_name Назва константи класу Options
+     * @param array  $defaults    Масив дефолтних значень (Options::DEFAULTS)
+     *
+     * @return mixed
+     */
+    function blockify_get_field_global_first(string $option_name, array $defaults)
+    {
+        $global = get_option($option_name);
+
+        if (!empty($global) || $global === '0') {
+            return $global;
+        }
+
+        $local = get_field($option_name);
+
+        if (!empty($local) || $local === '0') {
+            return $local;
         }
 
         return $defaults[$option_name] ?? null;

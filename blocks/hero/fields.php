@@ -22,6 +22,16 @@ function register_hero_acf_fields()
                 'required' => 1,
             ),
             array(
+                'key' => create_acf_key(Options::USE_GLOBAL_OPTIONS),
+                'name' => Options::USE_GLOBAL_OPTIONS,
+                'label' => 'Use global options first',
+                'type' => 'true_false',
+                'ui' => 1,
+                'ui_on_text' => 'Yes',
+                'ui_off_text' => 'No',
+                'default_value' => 1,
+            ),
+            array(
                 'key' => create_acf_key(Options::SUBTITLE),
                 'name' => Options::SUBTITLE,
                 'label' => 'Subtitle',
