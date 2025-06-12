@@ -19,8 +19,12 @@ $hero_image_right    = Options::getFieldWithDefaults(Options::HERO_IMAGE_RIGHT);
 $hero_image_field    = get_field(Options::HERO_IMAGE);
 $hero_image_alt      = $hero_image_field['alt'] ?? null;
 $hero_image_url      = $hero_image_field['url'] ?? null;
+$use_global          = get_field(Options::USE_GLOBAL_OPTIONS);
 
-if (empty($hero_image_url) && !empty($hero_image_id)) {
+if ($use_global && !empty($hero_image_id)) {
+    $hero_image_url = wp_get_attachment_image_url($hero_image_id, 'full');
+    $hero_image_alt = get_post_meta($hero_image_id, '_wp_attachment_image_alt', true) ?: null;
+} elseif (empty($hero_image_url) && !empty($hero_image_id)) {
     $hero_image_url = wp_get_attachment_image_url($hero_image_id, 'full');
     $hero_image_alt = get_post_meta($hero_image_id, '_wp_attachment_image_alt', true) ?: null;
 }
