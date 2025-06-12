@@ -12,12 +12,14 @@ final class Options {
     const BACKGROUND_COLOR    = 'pro_steps_background_color'; // the same
     const COLOR_FOR_GRADIENT  = 'blockify_pro_steps_color_for_gradient';
     const LINE_COLOR          = 'blockify_pro_steps_line_color';
+    const USE_GLOBAL_OPTIONS  = 'blockify_pro_steps_use_global_options';
 
     const DEFAULTS = [
         self::NUMBER_COLOR       => '#e6e6e6',
         self::BACKGROUND_COLOR   => '#efefef',
         self::COLOR_FOR_GRADIENT => 'rgba(0, 0, 0, 0)',
         self::LINE_COLOR         => '#cccccc',
+        self::USE_GLOBAL_OPTIONS => 0,
     ];
 
     const UPDATE_METHODS = [
@@ -35,6 +37,12 @@ final class Options {
     ];
 
     public static function getFieldWithDefaults($field_name) {
+        $use_global = get_field(self::USE_GLOBAL_OPTIONS);
+
+        if ($use_global) {
+            return blockify_get_field_global_first($field_name, self::DEFAULTS);
+        }
+
         return blockify_get_field($field_name, self::DEFAULTS);
     }
 }
