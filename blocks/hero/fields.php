@@ -37,6 +37,15 @@ function register_hero_acf_fields()
                 'label' => 'Subtitle',
                 'type' => 'text',
                 'required' => 0,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => create_acf_key(Options::USE_GLOBAL_OPTIONS),
+                            'operator' => '!=',
+                            'value' => 1,
+                        ),
+                    ),
+                ),
             ),
             array(
                 'key' => create_acf_key(Options::HERO_IMAGE),
@@ -48,6 +57,15 @@ function register_hero_acf_fields()
                 'preview_size' => 'thumbnail',
                 'library' => 'all',
                 'instructions' => 'Image size: 650x774. Not required.',
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => create_acf_key(Options::USE_GLOBAL_OPTIONS),
+                            'operator' => '!=',
+                            'value' => 1,
+                        ),
+                    ),
+                ),
             ),
             array(
                 'key' => create_acf_key(Options::HERO_IMAGE_TOP),
@@ -56,6 +74,15 @@ function register_hero_acf_fields()
                 'type' => 'number',
                 'wrapper' => array(
                     'width' => 25,
+                ),
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => create_acf_key(Options::USE_GLOBAL_OPTIONS),
+                            'operator' => '!=',
+                            'value' => 1,
+                        ),
+                    ),
                 ),
             ),
             array(
@@ -66,6 +93,15 @@ function register_hero_acf_fields()
                 'wrapper' => array(
                     'width' => 25,
                 ),
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => create_acf_key(Options::USE_GLOBAL_OPTIONS),
+                            'operator' => '!=',
+                            'value' => 1,
+                        ),
+                    ),
+                ),
             ),
             array(
                 'key' => create_acf_key(Options::TITLE_COLOR),
@@ -73,6 +109,15 @@ function register_hero_acf_fields()
                 'label' => 'Title color',
                 'type' => 'color_picker',
                 'enable_opacity' => false,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => create_acf_key(Options::USE_GLOBAL_OPTIONS),
+                            'operator' => '!=',
+                            'value' => 1,
+                        ),
+                    ),
+                ),
             ),
             array(
                 'key' => create_acf_key(Options::SUBTITLE_COLOR),
@@ -80,6 +125,15 @@ function register_hero_acf_fields()
                 'label' => 'Subtitle color',
                 'type' => 'color_picker',
                 'enable_opacity' => false,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => create_acf_key(Options::USE_GLOBAL_OPTIONS),
+                            'operator' => '!=',
+                            'value' => 1,
+                        ),
+                    ),
+                ),
             ),
             array(
                 'key' => create_acf_key(Options::BACKGROUND_COLOR),
@@ -87,6 +141,15 @@ function register_hero_acf_fields()
                 'label' => 'Background color',
                 'type' => 'color_picker',
                 'enable_opacity' => false,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => create_acf_key(Options::USE_GLOBAL_OPTIONS),
+                            'operator' => '!=',
+                            'value' => 1,
+                        ),
+                    ),
+                ),
             ),
             array(
                 'key' => create_acf_key(Options::COLOR_FOR_GRADIENT),
@@ -98,6 +161,11 @@ function register_hero_acf_fields()
                         array(
                             'field' => create_acf_key(Options::IS_ENABLED_GRADIENT),
                             'operator' => '==',
+                            'value' => 1,
+                        ),
+                        array(
+                            'field' => create_acf_key(Options::USE_GLOBAL_OPTIONS),
+                            'operator' => '!=',
                             'value' => 1,
                         ),
                     ),
@@ -114,6 +182,15 @@ function register_hero_acf_fields()
                 'ui_on_text' => 'On',
                 'ui_off_text' => 'Off',
                 'default_value' => 1,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => create_acf_key(Options::USE_GLOBAL_OPTIONS),
+                            'operator' => '!=',
+                            'value' => 1,
+                        ),
+                    ),
+                ),
             ),
             array(
                 'key' => 'field_hero_cards',
