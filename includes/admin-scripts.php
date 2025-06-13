@@ -13,12 +13,11 @@ add_action('admin_enqueue_scripts', function($hook) {
 
     if (in_array($hook, ['term.php', 'edit-tags.php'], true)) {
         wp_enqueue_script(
-            'blockify-taxonomy-editor',
-            blockify_get_file_url('taxonomy-block-editor.js', 'scripts'),
-            ['jquery', 'wp-block-editor', 'wp-element', 'wp-blocks', 'wp-components'],
-            blockify_get_file_version('taxonomy-block-editor.js', 'scripts'),
+            'blockify-taxonomy-buttons',
+            blockify_get_file_url('taxonomy-block-buttons.js', 'scripts'),
+            ['jquery'],
+            blockify_get_file_version('taxonomy-block-buttons.js', 'scripts'),
             true
         );
-        wp_enqueue_style('wp-edit-blocks');
     }
 });
