@@ -1,7 +1,17 @@
-(function ($) {
+(function ($, wp) {
     if (!$('#edittag').length) {
         return;
     }
+
+    const {
+        createElement,
+        render,
+        unmountComponentAtNode,
+        useState
+    } = wp.element;
+    const { Modal, Button } = wp.components;
+    const { BlockEditorProvider, BlockList, WritingFlow } = wp.blockEditor;
+    const { createBlock, serialize } = wp.blocks;
 
     const blocks = [
         { name: 'acf/hero', label: 'Hero' },
@@ -16,21 +26,50 @@
         blocks.forEach(block => {
             const button = $('<button type="button" class="button" style="margin-right:4px;"></button>')
                 .text(block.label)
-                .on('click', () => {
-                    const snippet = `<!-- wp:${block.name} /-->`;
-                    if (navigator.clipboard && window.isSecureContext) {
-                        navigator.clipboard.writeText(snippet);
-                    } else {
-                        const temp = $('<textarea>').appendTo('body').val(snippet).select();
-                        document.execCommand('copy');
-                        temp.remove();
-                    }
-                    button.text('Скопійовано!');
-                    setTimeout(() => button.text(block.label), 1500);
-                });
+                .data('label', block.label)
+                .on('click', () => openEditor(block.name, textarea, button));
             container.append(button);
         });
 
         textarea.before(container);
     });
-})(jQuery);
+
+    function openEditor(blockName, textarea, btn) {
+        const wrapper = $('<div class="blockify-modal"></div>').appendTo('body')[0];
+
+        function ModalComponent() {
+            const [blocksState, setBlocks] = useState([createBlock(blockName)]);
+
+            const insertBlock = () => {
+                const content = serialize(blocksState);
+                const current = textarea.val();
+                textarea.val(current ? current + "\n" + content : content);
+                close();
+                btn.text('Додано!');
+                setTimeout(() => btn.text(btn.data('label')), 1500);
+            };
+
+            const close = () => {
+                unmountComponentAtNode(wrapper);
+                $(wrapper).remove();
+            };
+
+            return createElement(
+                Modal,
+                { title: 'Редагувати блок', onRequestClose: close, className: 'blockify-taxonomy-editor' },
+                createElement(
+                    BlockEditorProvider,
+                    { value: blocksState, onInput: setBlocks, onChange: setBlocks },
+                    createElement(WritingFlow, null,
+                        createElement(BlockList)
+                    )
+                ),
+                createElement('div', { style: { marginTop: '16px' } },
+                    createElement(Button, { isPrimary: true, onClick: insertBlock }, 'Insert')
+                )
+            );
+        }
+
+        render(createElement(ModalComponent), wrapper);
+    }
+})(jQuery, window.wp);
