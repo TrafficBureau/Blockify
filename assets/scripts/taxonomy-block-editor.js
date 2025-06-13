@@ -1,8 +1,14 @@
-(function($){
-    if (!$("#edittag").length) return;
 
-    const textarea = $("#tag-description");
+(function ($) {
+    if (!$('#edittag').length) {
+        return;
+    }
+
+    const textarea = $('#description');
+    const wrap = $('#wp-description-wrap');
     const container = $('<div id="blockify-taxonomy-editor"></div>');
+
+    wrap.hide();
     textarea.hide().after(container);
 
     const initialBlocks = wp.blocks.parse(textarea.val());
