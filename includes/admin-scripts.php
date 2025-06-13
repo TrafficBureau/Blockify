@@ -15,7 +15,7 @@ add_action('admin_enqueue_scripts', function($hook) {
         wp_enqueue_script(
             'blockify-taxonomy-editor',
             blockify_get_file_url('taxonomy-block-editor.js', 'scripts'),
-            ['jquery', 'wp-block-editor', 'wp-element', 'wp-blocks'],
+            ['jquery', 'wp-block-editor', 'wp-element', 'wp-blocks', 'wp-components'],
             blockify_get_file_version('taxonomy-block-editor.js', 'scripts'),
             true
         );
