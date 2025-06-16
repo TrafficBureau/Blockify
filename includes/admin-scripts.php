@@ -4,6 +4,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+// Delay execution to ensure ACF scripts are registered first.
 add_action('admin_enqueue_scripts', function ($hook) {
     if (!is_admin()) {
         return;
@@ -30,4 +31,4 @@ add_action('admin_enqueue_scripts', function ($hook) {
             true
         );
     }
-});
+}, 20);
