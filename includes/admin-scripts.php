@@ -13,6 +13,9 @@ add_action('admin_enqueue_scripts', function ($hook) {
     wp_enqueue_media();
 
     if (in_array($hook, ['term.php', 'edit-tags.php'], true)) {
+        // Load block editor assets so ACF can register its blocks.
+        do_action('enqueue_block_editor_assets');
+
         wp_enqueue_style('wp-edit-blocks');
 
         $deps = ['jquery', 'wp-blocks', 'wp-element', 'wp-components', 'wp-block-editor'];
