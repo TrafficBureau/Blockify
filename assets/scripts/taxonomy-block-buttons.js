@@ -20,42 +20,32 @@
     ];
 
     $(function () {
-        const textarea = $('#description');
         const container = $('<div class="blockify-buttons" style="margin-bottom:8px;"></div>');
 
         blocks.forEach(block => {
             const button = $('<button type="button" class="button" style="margin-right:4px;"></button>')
                 .text(block.label)
                 .data('label', block.label)
-                .on('click', () => openEditor(block.name, textarea, button));
+                .on('click', () => openEditor(block.name, button));
             container.append(button);
         });
 
-        textarea.before(container);
+        $('#description').before(container);
     });
 
-    function openEditor(blockName, textarea, btn) {
+    function openEditor(blockName, btn) {
         const wrapper = $('<div class="blockify-modal"></div>').appendTo('body')[0];
 
         function ModalComponent() {
             const [blocksState, setBlocks] = useState([createBlock(blockName)]);
 
-            const insertBlock = () => {
+            const copyBlock = () => {
                 const content = serialize(blocksState);
-                const tmce = typeof tinymce !== 'undefined' ? tinymce.get('description') : null;
-
-                if (tmce && !tmce.isHidden()) {
-                    tmce.focus();
-                    tmce.selection.setContent(content);
-                    tmce.save();
-                } else {
-                    const current = textarea.val();
-                    textarea.val(current ? current + "\n" + content : content);
-                }
-
-                close();
-                btn.text('Додано!');
-                setTimeout(() => btn.text(btn.data('label')), 1500);
+                copyToClipboard(content).then(() => {
+                    close();
+                    btn.text('Скопійовано!');
+                    setTimeout(() => btn.text(btn.data('label')), 1500);
+                });
             };
 
             const close = () => {
@@ -74,11 +64,36 @@
                     )
                 ),
                 createElement('div', { style: { marginTop: '16px' } },
-                    createElement(Button, { isPrimary: true, onClick: insertBlock }, 'Insert')
+                    createElement(Button, { isPrimary: true, onClick: copyBlock }, 'Копіювати')
                 )
             );
         }
 
         render(createElement(ModalComponent), wrapper);
+    }
+
+    function copyToClipboard(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+            return navigator.clipboard.writeText(text);
+        }
+
+        return new Promise((resolve, reject) => {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.left = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+
+            try {
+                document.execCommand('copy');
+                resolve();
+            } catch (err) {
+                reject(err);
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        });
     }
 })(jQuery, window.wp);
