@@ -42,8 +42,17 @@
 
             const insertBlock = () => {
                 const content = serialize(blocksState);
-                const current = textarea.val();
-                textarea.val(current ? current + "\n" + content : content);
+                const tmce = typeof tinymce !== 'undefined' ? tinymce.get('description') : null;
+
+                if (tmce && !tmce.isHidden()) {
+                    tmce.focus();
+                    tmce.selection.setContent(content);
+                    tmce.save();
+                } else {
+                    const current = textarea.val();
+                    textarea.val(current ? current + "\n" + content : content);
+                }
+
                 close();
                 btn.text('Додано!');
                 setTimeout(() => btn.text(btn.data('label')), 1500);
