@@ -5,7 +5,7 @@
         }
 
         return new Promise(function (resolve, reject) {
-            var textarea = document.createElement('textarea');
+            const textarea = document.createElement('textarea');
             textarea.value = text;
             textarea.style.position = 'fixed';
             textarea.style.left = '-9999px';
@@ -32,8 +32,9 @@
         createElement,
         render,
         unmountComponentAtNode,
-        useState
+        useState,
     } = wp.element;
+
     const { Modal, Button } = wp.components;
     const { BlockEditorProvider, BlockList, WritingFlow } = wp.blockEditor;
     const { createBlock, serialize } = wp.blocks;
@@ -54,7 +55,6 @@
                 .on('click', () => openEditor(block.name, button));
             container.append(button);
         });
-
         $('#description').before(container);
     });
 
@@ -80,17 +80,25 @@
 
             return createElement(
                 Modal,
-                { title: 'Редагувати блок', onRequestClose: close, className: 'blockify-taxonomy-editor' },
+                {
+                    title: 'Редагувати блок',
+                    onRequestClose: close,
+                    className: 'blockify-taxonomy-editor',
+                },
                 createElement(
                     BlockEditorProvider,
-                    { value: blocksState, onInput: setBlocks, onChange: setBlocks },
+                    {
+                        value: blocksState,
+                        onInput: setBlocks,
+                        onChange: setBlocks,
+                    },
                     createElement(WritingFlow, null,
-                        createElement(BlockList)
-                    )
+                        createElement(BlockList),
+                    ),
                 ),
                 createElement('div', { style: { marginTop: '16px' } },
-                    createElement(Button, { isPrimary: true, onClick: copyBlock }, 'Копіювати')
-                )
+                    createElement(Button, { isPrimary: true, onClick: copyBlock }, 'Копіювати'),
+                ),
             );
         }
 
