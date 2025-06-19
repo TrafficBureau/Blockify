@@ -20,15 +20,6 @@ add_action('admin_enqueue_scripts', function ($hook) {
 
         $deps = ['jquery', 'wp-blocks', 'wp-element', 'wp-components', 'wp-block-editor'];
 
-        wp_enqueue_script(
-            'blockify-helpers',
-            blockify_get_file_url('helpers.js', 'scripts'),
-            [],
-            blockify_get_file_version('helpers.js', 'scripts'),
-            true
-        );
-        $deps[] = 'blockify-helpers';
-
         // Ensure ACF blocks are registered when opening the modal editor.
         if (wp_script_is('acf-blocks', 'registered')) {
             wp_enqueue_script('acf-blocks');
