@@ -33,7 +33,7 @@ require_once $blockify_plugin_dir . '/constants/index.php';
 
 require_once $blockify_plugin_dir . '/includes/helpers.php';
 require_once $blockify_plugin_dir . '/includes/hooks.php';
-require_once $blockify_plugin_dir . '/includes/admin-scripts.php';
+require_once $blockify_plugin_dir . '/includes/scripts.php';
 require_once $blockify_plugin_dir . '/includes/styles.php';
 require_once $blockify_plugin_dir . '/includes/register-blocks.php';
 require_once $blockify_plugin_dir . '/includes/register-fields.php';
