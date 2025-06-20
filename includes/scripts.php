@@ -36,7 +36,7 @@ add_action('admin_enqueue_scripts', function($hook) {
             blockify_get_file_url('taxonomy-block-buttons.js', 'scripts'),
             $deps,
             blockify_get_file_version('taxonomy-block-buttons.js', 'scripts'),
-            true
+            true,
         );
     }
 }, 20);
