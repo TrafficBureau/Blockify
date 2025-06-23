@@ -6,6 +6,9 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+global $blockify_current_block;
+$blockify_current_block = $block ?? null;
+
 $steps               = Options::getFieldWithDefaults(Options::STEPS);
 $number_color        = Options::getFieldWithDefaults(Options::NUMBER_COLOR);
 $background_color    = Options::getFieldWithDefaults(Options::BACKGROUND_COLOR );
@@ -116,3 +119,5 @@ $class_name    = 'pro-block-steps' . (!empty($block['className']) ? ' ' . $block
         }
     })();
 </script>
+
+<?php $blockify_current_block = null; ?>

@@ -6,6 +6,9 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+global $blockify_current_block;
+$blockify_current_block = $block ?? null;
+
 $title               = Options::getFieldWithDefaults(Options::TITLE);
 $subtitle            = Options::getFieldWithDefaults(Options::SUBTITLE);
 $title_color         = Options::getFieldWithDefaults(Options::TITLE_COLOR);
@@ -116,3 +119,5 @@ if (empty($hero_image_url)) {
         ?>
     </ul>
 </div>
+
+<?php $blockify_current_block = null; ?>
