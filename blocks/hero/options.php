@@ -65,7 +65,7 @@ final class Options {
 
         $use_global = get_field(self::USE_GLOBAL_OPTIONS);
 
-        if ($use_global === null && isset($blockify_current_block['data'][self::USE_GLOBAL_OPTIONS])) {
+        if (($use_global === null || $use_global === '') && isset($blockify_current_block['data'][self::USE_GLOBAL_OPTIONS])) {
             $use_global = $blockify_current_block['data'][self::USE_GLOBAL_OPTIONS];
         }
 
