@@ -15,6 +15,7 @@ $line_color          = Options::getFieldWithDefaults(Options::LINE_COLOR);
 $is_even_steps = count($steps) % 2 === 0;
 $anchor        = !empty($block['anchor']) ? 'id="' . esc_attr($block['anchor']) . '" ' : '';
 $class_name    = 'pro-block-steps' . (!empty($block['className']) ? ' ' . $block['className'] : '');
+$meta_heading  = blockify_get_prev_heading_for_anchor($block['anchor'] ?? '', $block['postId'] ?? 0);
 
 $css = <<<CSS
 :root {
@@ -25,7 +26,7 @@ $css = <<<CSS
 CSS;
 
 ?><style><?= blockify_minify_css($css) ?></style><section <?= $anchor; // phpcs:ignore ?> class="<?= esc_attr($class_name); ?>" itemscope itemtype="https://schema.org/HowTo">
-    <meta itemprop="name" content="" id="howto-block-name-meta">
+    <meta itemprop="name" content="<?= esc_attr($meta_heading); ?>" id="howto-block-name-meta">
     <ol>
         <?php foreach ($steps as $key => $step) :
             ++$key;
@@ -90,27 +91,3 @@ CSS;
         <?php endforeach; ?>
     </ol>
 </section>
-
-<script>
-    (function() {
-        const section = document.querySelector('.pro-block-steps[itemtype="https://schema.org/HowTo"]');
-
-        if (!section) {
-            return;
-        }
-
-        let node = section.previousElementSibling;
-        let found = '';
-
-        while(node && !found) {
-            if (node.matches && (node.matches('h2') || node.matches('h3') || node.matches('h4'))) {
-                found = node.textContent.trim();
-            }
-            node = node.previousElementSibling;
-        }
-
-        if (found) {
-            document.getElementById('howto-block-name-meta').setAttribute('content', found);
-        }
-    })();
-</script>

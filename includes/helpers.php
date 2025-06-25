@@ -210,8 +210,46 @@ if (!function_exists('blockify_minify_css')) {
      * @param string $css Вихідний CSS
      * @return string Мініфікований CSS
      */
-    function blockify_minify_css(string $css): string {
-        $css = preg_replace('/\s+/', ' ', $css);
-        return trim(str_replace(["\n", "\r", "\t"], '', $css));
+function blockify_minify_css(string $css): string {
+    $css = preg_replace('/\s+/', ' ', $css);
+    return trim(str_replace(["\n", "\r", "\t"], '', $css));
+}
+}
+
+if (!function_exists('blockify_get_prev_heading_for_anchor')) {
+    /**
+     * Повертає текст попереднього заголовка перед блоком із заданим якірним атрибутом.
+     *
+     * @param string $anchor  Значення атрибута id блоку.
+     * @param int    $post_id ID запису (необов'язковий).
+     *
+     * @return string Текст заголовка або порожній рядок.
+     */
+    function blockify_get_prev_heading_for_anchor(string $anchor, int $post_id = 0): string
+    {
+        if (empty($anchor)) {
+            return '';
+        }
+
+        $post_id = $post_id ?: get_the_ID();
+        $content = get_post_field('post_content', $post_id);
+
+        if (!$content) {
+            return '';
+        }
+
+        $position = strpos($content, 'id="' . $anchor . '"');
+
+        if ($position === false) {
+            return '';
+        }
+
+        $before = substr($content, 0, $position);
+
+        if (preg_match_all('/<h([234])[^>]*>(.*?)<\/h\1>/is', $before, $matches) && !empty($matches[2])) {
+            return trim(wp_strip_all_tags(end($matches[2])));
+        }
+
+        return '';
     }
 }
