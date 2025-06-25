@@ -238,7 +238,7 @@ if (!function_exists('blockify_get_prev_heading_for_anchor')) {
             return '';
         }
 
-        $position = strpos($content, 'id="' . $anchor . '"');
+        $position = strpos($content, $anchor);
 
         if ($position === false) {
             return '';

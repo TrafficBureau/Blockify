@@ -13,9 +13,9 @@ $color_for_gradient  = Options::getFieldWithDefaults(Options::COLOR_FOR_GRADIENT
 $line_color          = Options::getFieldWithDefaults(Options::LINE_COLOR);
 
 $is_even_steps = count($steps) % 2 === 0;
-$anchor        = !empty($block['anchor']) ? 'id="' . esc_attr($block['anchor']) . '" ' : '';
+$anchor        = !empty($block['anchor']) ? esc_attr($block['anchor']) : 'pro-steps-' . uniqid();
 $class_name    = 'pro-block-steps' . (!empty($block['className']) ? ' ' . $block['className'] : '');
-$meta_heading  = blockify_get_prev_heading_for_anchor($block['anchor'] ?? '', $block['postId'] ?? 0);
+$meta_heading  = blockify_get_prev_heading_for_anchor($anchor, $block['postId'] ?? 0);
 
 $css = <<<CSS
 :root {
@@ -29,7 +29,7 @@ CSS;
 
 <style><?= blockify_minify_css($css) ?></style>
 
-<section <?= $anchor; // phpcs:ignore ?> class="<?= esc_attr($class_name); ?>" itemscope itemtype="https://schema.org/HowTo">
+<section id="<?= $anchor; // phpcs:ignore ?>" class="<?= esc_attr($class_name); ?>" itemscope itemtype="https://schema.org/HowTo">
     <meta itemprop="name" content="<?= esc_attr($meta_heading); ?>" id="howto-block-name-meta">
     <ol>
         <?php foreach ($steps as $key => $step) :
