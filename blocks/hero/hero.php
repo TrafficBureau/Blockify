@@ -60,7 +60,11 @@ if ($is_enabled_gradient) {
 CSS;
 }
 
-?><style><?= blockify_minify_css($css) ?></style><div class="blockify-hero">
+?>
+
+<style><?= blockify_minify_css($css) ?></style>
+
+<div class="blockify-hero">
     <header class="heading">
         <div class="title">
             <?= esc_html($title) ?>

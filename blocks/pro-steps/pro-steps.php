@@ -25,7 +25,11 @@ $css = <<<CSS
 }
 CSS;
 
-?><style><?= blockify_minify_css($css) ?></style><section <?= $anchor; // phpcs:ignore ?> class="<?= esc_attr($class_name); ?>" itemscope itemtype="https://schema.org/HowTo">
+?>
+
+<style><?= blockify_minify_css($css) ?></style>
+
+<section <?= $anchor; // phpcs:ignore ?> class="<?= esc_attr($class_name); ?>" itemscope itemtype="https://schema.org/HowTo">
     <meta itemprop="name" content="<?= esc_attr($meta_heading); ?>" id="howto-block-name-meta">
     <ol>
         <?php foreach ($steps as $key => $step) :
