@@ -40,9 +40,7 @@ if (empty($hero_image_url)) {
     $hero_image_url = blockify_get_file_url('/blocks/hero/hero.png');
 }
 
-?>
-
-<style>
+?><style>
     :root {
         --blockify-hero-title-color: <?= $title_color ?>;
         --blockify-hero-subtitle-color: <?= $subtitle_color ?>;
@@ -61,9 +59,7 @@ if (empty($hero_image_url)) {
             );
         }
     <?php endif; ?>
-</style>
-
-<div class="blockify-hero">
+</style><div class="blockify-hero">
     <header class="heading">
         <div class="title">
             <?= esc_html($title) ?>

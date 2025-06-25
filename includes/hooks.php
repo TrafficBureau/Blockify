@@ -6,8 +6,14 @@ if (!defined('ABSPATH')) {
 
 
 add_filter('term_description', function ($description) {
-    if (function_exists('has_blocks') && function_exists('do_blocks') && has_blocks($description)) {
+    if (
+        function_exists('has_blocks') &&
+        function_exists('do_blocks') &&
+        has_blocks($description)
+    ) {
+        remove_filter('term_description', 'wpautop');
         $description = do_blocks($description);
+        add_filter('term_description', 'wpautop');
     }
 
     return $description;
