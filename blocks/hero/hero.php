@@ -6,9 +6,6 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-global $blockify_current_block;
-$blockify_current_block = $block ?? null;
-
 $title               = Options::getFieldWithDefaults(Options::TITLE);
 $subtitle            = Options::getFieldWithDefaults(Options::SUBTITLE);
 $title_color         = Options::getFieldWithDefaults(Options::TITLE_COLOR);
@@ -40,26 +37,20 @@ if (empty($hero_image_url)) {
     $hero_image_url = blockify_get_file_url('/blocks/hero/hero.png');
 }
 
-?><style>
-    :root {
-        --blockify-hero-title-color: <?= $title_color ?>;
-        --blockify-hero-subtitle-color: <?= $subtitle_color ?>;
-        --blockify-hero-background-color: <?= $background_color ?>;
-        --blockify-hero-background-color-for-gradient: <?= $color_for_gradient ?>;
-        --blockify-hero-image-top: <?= $hero_image_top ?>px;
-        --blockify-hero-image-right: <?= $hero_image_right ?>px;
-    }
+$css = ':root {' .
+    '--blockify-hero-title-color: ' . $title_color . ';' .
+    '--blockify-hero-subtitle-color: ' . $subtitle_color . ';' .
+    '--blockify-hero-background-color: ' . $background_color . ';' .
+    '--blockify-hero-background-color-for-gradient: ' . $color_for_gradient . ';' .
+    '--blockify-hero-image-top: ' . $hero_image_top . 'px;' .
+    '--blockify-hero-image-right: ' . $hero_image_right . 'px;' .
+'}';
 
-    <?php if ($is_enabled_gradient) : ?>
-        .blockify-hero {
-            background-image: linear-gradient(
-                180deg,
-                var(--blockify-hero-background-color),
-                var(--blockify-hero-background-color-for-gradient)
-            );
-        }
-    <?php endif; ?>
-</style><div class="blockify-hero">
+if ($is_enabled_gradient) {
+    $css .= '.blockify-hero{background-image:linear-gradient(180deg,var(--blockify-hero-background-color),var(--blockify-hero-background-color-for-gradient));}';
+}
+
+?><style><?= blockify_minify_css($css) ?></style><div class="blockify-hero">
     <header class="heading">
         <div class="title">
             <?= esc_html($title) ?>
@@ -115,5 +106,3 @@ if (empty($hero_image_url)) {
         ?>
     </ul>
 </div>
-
-<?php $blockify_current_block = null; ?>

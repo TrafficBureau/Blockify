@@ -118,11 +118,6 @@ function blockify_get_field(string $option_name, array $defaults)
 {
         $local = get_field($option_name); // Get the value from the local ACF field first
 
-        // ACF може не повертати значення у контексті таксономій
-        if (($local === null || $local === false || $local === '') && isset($GLOBALS['blockify_current_block']['data'][$option_name])) {
-            $local = $GLOBALS['blockify_current_block']['data'][$option_name];
-        }
-
         if (!empty($local) || $local === '0') {
             return $local;
         }
@@ -155,10 +150,6 @@ if (!function_exists('blockify_get_field_global_first')) {
         }
 
         $local = get_field($option_name);
-
-        if (($local === null || $local === false || $local === '') && isset($GLOBALS['blockify_current_block']['data'][$option_name])) {
-            $local = $GLOBALS['blockify_current_block']['data'][$option_name];
-        }
 
         if (!empty($local) || $local === '0') {
             return $local;
@@ -209,5 +200,18 @@ if (!function_exists('sanitize_any_color')) {
         }
 
         return '';
+    }
+}
+
+if (!function_exists('blockify_minify_css')) {
+    /**
+     * Повертає CSS без перенесень рядків і зайвих пробілів
+     *
+     * @param string $css Вихідний CSS
+     * @return string Мініфікований CSS
+     */
+    function blockify_minify_css(string $css): string {
+        $css = preg_replace('/\s+/', ' ', $css);
+        return trim(str_replace(["\n", "\r", "\t"], '', $css));
     }
 }

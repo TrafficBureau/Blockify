@@ -6,9 +6,6 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-global $blockify_current_block;
-$blockify_current_block = $block ?? null;
-
 $steps               = Options::getFieldWithDefaults(Options::STEPS);
 $number_color        = Options::getFieldWithDefaults(Options::NUMBER_COLOR);
 $background_color    = Options::getFieldWithDefaults(Options::BACKGROUND_COLOR );
@@ -19,13 +16,13 @@ $is_even_steps = count($steps) % 2 === 0;
 $anchor        = !empty($block['anchor']) ? 'id="' . esc_attr($block['anchor']) . '" ' : '';
 $class_name    = 'pro-block-steps' . (!empty($block['className']) ? ' ' . $block['className'] : '');
 
-?><style>
-    :root {
-        --pro-steps-number-color: <?= $number_color ?> ;
-        --pro-steps-background-color: <?= $background_color ?>;
-        --pro-color-for-gradient: <?= $color_for_gradient ?>;
-    }
-</style><section <?= $anchor; // phpcs:ignore ?> class="<?= esc_attr($class_name); ?>" itemscope itemtype="https://schema.org/HowTo">
+$css = ':root {' .
+    '--pro-steps-number-color: ' . $number_color . ';' .
+    '--pro-steps-background-color: ' . $background_color . ';' .
+    '--pro-color-for-gradient: ' . $color_for_gradient . ';' .
+'}';
+
+?><style><?= blockify_minify_css($css) ?></style><section <?= $anchor; // phpcs:ignore ?> class="<?= esc_attr($class_name); ?>" itemscope itemtype="https://schema.org/HowTo">
     <meta itemprop="name" content="" id="howto-block-name-meta">
     <ol>
         <?php foreach ($steps as $key => $step) :
@@ -115,5 +112,3 @@ $class_name    = 'pro-block-steps' . (!empty($block['className']) ? ' ' . $block
         }
     })();
 </script>
-
-<?php $blockify_current_block = null; ?>

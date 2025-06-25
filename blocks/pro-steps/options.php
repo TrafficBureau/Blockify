@@ -37,13 +37,7 @@ final class Options {
     ];
 
     public static function getFieldWithDefaults($field_name) {
-        global $blockify_current_block;
-
         $use_global = get_field(self::USE_GLOBAL_OPTIONS);
-
-        if (($use_global === null || $use_global === '') && isset($blockify_current_block['data'][self::USE_GLOBAL_OPTIONS])) {
-            $use_global = $blockify_current_block['data'][self::USE_GLOBAL_OPTIONS];
-        }
 
         if ($use_global) {
             return blockify_get_field_global_first($field_name, self::DEFAULTS);
