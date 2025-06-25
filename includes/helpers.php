@@ -231,8 +231,30 @@ if (!function_exists('blockify_get_prev_heading_for_anchor')) {
             return '';
         }
 
-        $post_id = $post_id ?: get_the_ID();
-        $content = get_post_field('post_content', $post_id);
+        $content = '';
+
+        if ($post_id) {
+            $content = get_post_field('post_content', $post_id);
+        }
+
+        if (!$content) {
+            if (is_tax() || is_category() || is_tag()) {
+                $term = get_queried_object();
+                if ($term && !is_wp_error($term) && isset($term->description)) {
+                    $content = $term->description;
+                }
+            } elseif (is_home()) {
+                $posts_page = (int) get_option('page_for_posts');
+                if ($posts_page) {
+                    $content = get_post_field('post_content', $posts_page);
+                }
+            } else {
+                $queried_id = get_queried_object_id();
+                if ($queried_id) {
+                    $content = get_post_field('post_content', $queried_id);
+                }
+            }
+        }
 
         if (!$content) {
             return '';
