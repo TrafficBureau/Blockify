@@ -11,9 +11,9 @@ add_filter('term_description', function ($description) {
         function_exists('do_blocks') &&
         has_blocks($description)
     ) {
-        remove_filter('term_description', 'wpautop');
+        remove_filter('term_description', 'wpautop', 30);
         $description = do_blocks($description);
-        add_filter('term_description', 'wpautop');
+        add_filter('term_description', 'wpautop', 30);
     }
 
     return $description;
