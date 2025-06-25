@@ -37,30 +37,30 @@ if (empty($hero_image_url)) {
     $hero_image_url = blockify_get_file_url('/blocks/hero/hero.png');
 }
 
-?>
+$css = <<<CSS
+:root {
+    --blockify-hero-title-color: {$title_color};
+    --blockify-hero-subtitle-color: {$subtitle_color};
+    --blockify-hero-background-color: {$background_color};
+    --blockify-hero-background-color-for-gradient: {$color_for_gradient};
+    --blockify-hero-image-top: {$hero_image_top}px;
+    --blockify-hero-image-right: {$hero_image_right}px;
+}
+CSS;
 
-<style>
-    :root {
-        --blockify-hero-title-color: <?= $title_color ?>;
-        --blockify-hero-subtitle-color: <?= $subtitle_color ?>;
-        --blockify-hero-background-color: <?= $background_color ?>;
-        --blockify-hero-background-color-for-gradient: <?= $color_for_gradient ?>;
-        --blockify-hero-image-top: <?= $hero_image_top ?>px;
-        --blockify-hero-image-right: <?= $hero_image_right ?>px;
-    }
+if ($is_enabled_gradient) {
+    $css .= <<<CSS
+.blockify-hero {
+    background-image: linear-gradient(
+        180deg,
+        var(--blockify-hero-background-color),
+        var(--blockify-hero-background-color-for-gradient)
+    );
+}
+CSS;
+}
 
-    <?php if ($is_enabled_gradient) : ?>
-        .blockify-hero {
-            background-image: linear-gradient(
-                180deg,
-                var(--blockify-hero-background-color),
-                var(--blockify-hero-background-color-for-gradient)
-            );
-        }
-    <?php endif; ?>
-</style>
-
-<div class="blockify-hero">
+?><style><?= blockify_minify_css($css) ?></style><div class="blockify-hero">
     <header class="heading">
         <div class="title">
             <?= esc_html($title) ?>

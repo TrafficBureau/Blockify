@@ -202,3 +202,16 @@ if (!function_exists('sanitize_any_color')) {
         return '';
     }
 }
+
+if (!function_exists('blockify_minify_css')) {
+    /**
+     * Повертає CSS без перенесень рядків і зайвих пробілів
+     *
+     * @param string $css Вихідний CSS
+     * @return string Мініфікований CSS
+     */
+    function blockify_minify_css(string $css): string {
+        $css = preg_replace('/\s+/', ' ', $css);
+        return trim(str_replace(["\n", "\r", "\t"], '', $css));
+    }
+}
