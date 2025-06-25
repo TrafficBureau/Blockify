@@ -16,11 +16,13 @@ $is_even_steps = count($steps) % 2 === 0;
 $anchor        = !empty($block['anchor']) ? 'id="' . esc_attr($block['anchor']) . '" ' : '';
 $class_name    = 'pro-block-steps' . (!empty($block['className']) ? ' ' . $block['className'] : '');
 
-$css = ':root {' .
-    '--pro-steps-number-color: ' . $number_color . ';' .
-    '--pro-steps-background-color: ' . $background_color . ';' .
-    '--pro-color-for-gradient: ' . $color_for_gradient . ';' .
-'}';
+$css = <<<CSS
+:root {
+    --pro-steps-number-color: {$number_color};
+    --pro-steps-background-color: {$background_color};
+    --pro-color-for-gradient: {$color_for_gradient};
+}
+CSS;
 
 ?><style><?= blockify_minify_css($css) ?></style><section <?= $anchor; // phpcs:ignore ?> class="<?= esc_attr($class_name); ?>" itemscope itemtype="https://schema.org/HowTo">
     <meta itemprop="name" content="" id="howto-block-name-meta">
