@@ -210,10 +210,10 @@ if (!function_exists('blockify_minify_css')) {
      * @param string $css Вихідний CSS
      * @return string Мініфікований CSS
      */
-function blockify_minify_css(string $css): string {
-    $css = preg_replace('/\s+/', ' ', $css);
-    return trim(str_replace(["\n", "\r", "\t"], '', $css));
-}
+    function blockify_minify_css(string $css): string {
+        $css = preg_replace('/\s+/', ' ', $css);
+        return trim(str_replace(["\n", "\r", "\t"], '', $css));
+    }
 }
 
 if (!function_exists('blockify_get_prev_heading_for_anchor')) {
