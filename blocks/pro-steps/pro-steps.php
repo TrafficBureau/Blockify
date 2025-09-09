@@ -16,13 +16,20 @@ $is_even_steps = count($steps) % 2 === 0;
 $anchor        = !empty($block['anchor']) ? esc_attr($block['anchor']) : 'pro-steps-' . uniqid();
 $class_name    = 'pro-block-steps' . (!empty($block['className']) ? ' ' . $block['className'] : '');
 
-$css = <<<CSS
+$css = "
 :root {
     --pro-steps-number-color: {$number_color};
     --pro-steps-background-color: {$background_color};
     --pro-color-for-gradient: {$color_for_gradient};
 }
-CSS;
+";
+
+static $pro_steps_inline_added = false;
+
+if ( ! $pro_steps_inline_added ) {
+    wp_add_inline_style( 'pro-steps-style', $css );
+    $pro_steps_inline_added = true;
+}
 
 ?>
 
@@ -94,27 +101,3 @@ CSS;
         <?php endforeach; ?>
     </ol>
 </section>
-
-<script>
-    (function() {
-        const section = document.querySelector('.pro-block-steps[itemtype="https://schema.org/HowTo"]');
-
-        if (!section) {
-            return;
-        }
-
-        let node = section.previousElementSibling;
-        let found = '';
-
-        while(node && !found) {
-            if (node.matches && (node.matches('h2') || node.matches('h3') || node.matches('h4'))) {
-                found = node.textContent.trim();
-            }
-            node = node.previousElementSibling;
-        }
-
-        if (found) {
-            document.getElementById('howto-block-name-meta').setAttribute('content', found);
-        }
-    })();
-</script>
