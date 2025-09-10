@@ -1,5 +1,7 @@
 <?php
 
+use TrafficBureau\Blockify\ProSteps\Options;
+
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -27,4 +29,10 @@ function blockify_enqueue_styles() {
         [],
         '1.0'
     );
+
+    $css = ':root { --pro-steps-number-color: ' . Options::getFieldWithDefaults(Options::NUMBER_COLOR) .
+           '; --pro-steps-background-color: ' . Options::getFieldWithDefaults(Options::BACKGROUND_COLOR) .
+           '; --pro-color-for-gradient: ' . Options::getFieldWithDefaults(Options::COLOR_FOR_GRADIENT) . '; }';
+
+    wp_add_inline_style('pro-steps-style', $css);
 }
