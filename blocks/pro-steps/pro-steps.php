@@ -6,36 +6,29 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$steps               = Options::getFieldWithDefaults(Options::STEPS);
-$number_color        = Options::getFieldWithDefaults(Options::NUMBER_COLOR);
-$background_color    = Options::getFieldWithDefaults(Options::BACKGROUND_COLOR );
-$color_for_gradient  = Options::getFieldWithDefaults(Options::COLOR_FOR_GRADIENT);
-$line_color          = Options::getFieldWithDefaults(Options::LINE_COLOR);
+$steps      = Options::getFieldWithDefaults(Options::STEPS);
+$line_color = Options::getFieldWithDefaults(Options::LINE_COLOR);
 
 $is_even_steps = count($steps) % 2 === 0;
 $anchor        = !empty($block['anchor']) ? esc_attr($block['anchor']) : 'pro-steps-' . uniqid();
 $class_name    = 'pro-block-steps' . (!empty($block['className']) ? ' ' . $block['className'] : '');
 
-$css = "
-:root {
-    --pro-steps-number-color: {$number_color};
-    --pro-steps-background-color: {$background_color};
-    --pro-color-for-gradient: {$color_for_gradient};
-}
-";
+$use_global = get_field(Options::USE_GLOBAL_OPTIONS);
+$style      = '';
 
-static $pro_steps_inline_added = false;
+if (!$use_global) {
+    $number_color       = Options::getFieldWithDefaults(Options::NUMBER_COLOR);
+    $background_color   = Options::getFieldWithDefaults(Options::BACKGROUND_COLOR);
+    $color_for_gradient = Options::getFieldWithDefaults(Options::COLOR_FOR_GRADIENT);
 
-if ( ! $pro_steps_inline_added ) {
-    wp_add_inline_style( 'pro-steps-style', $css );
-    $pro_steps_inline_added = true;
+    $style = '--pro-steps-number-color: ' . $number_color .
+             '; --pro-steps-background-color: ' . $background_color .
+             '; --pro-color-for-gradient: ' . $color_for_gradient . ';';
 }
 
 ?>
 
-<style><?= blockify_minify_css($css) ?></style>
-
-<section id="<?= $anchor; // phpcs:ignore ?>" class="<?= esc_attr($class_name); ?>" itemscope itemtype="https://schema.org/HowTo">
+<section id="<?= $anchor; // phpcs:ignore ?>" class="<?= esc_attr($class_name); ?>"<?= $style ? ' style="' . esc_attr($style) . '"' : '' ?> itemscope itemtype="https://schema.org/HowTo">
     <meta itemprop="name" content="" id="howto-block-name-meta">
     <ol>
         <?php foreach ($steps as $key => $step) :
