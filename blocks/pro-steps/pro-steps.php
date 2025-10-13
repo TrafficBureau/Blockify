@@ -6,29 +6,29 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$steps               = Options::getFieldWithDefaults(Options::STEPS);
-$number_color        = Options::getFieldWithDefaults(Options::NUMBER_COLOR);
-$background_color    = Options::getFieldWithDefaults(Options::BACKGROUND_COLOR );
-$color_for_gradient  = Options::getFieldWithDefaults(Options::COLOR_FOR_GRADIENT);
-$line_color          = Options::getFieldWithDefaults(Options::LINE_COLOR);
+$steps      = Options::getFieldWithDefaults(Options::STEPS);
+$line_color = Options::getFieldWithDefaults(Options::LINE_COLOR);
 
 $is_even_steps = count($steps) % 2 === 0;
 $anchor        = !empty($block['anchor']) ? esc_attr($block['anchor']) : 'pro-steps-' . uniqid();
 $class_name    = 'pro-block-steps' . (!empty($block['className']) ? ' ' . $block['className'] : '');
 
-$css = <<<CSS
-:root {
-    --pro-steps-number-color: {$number_color};
-    --pro-steps-background-color: {$background_color};
-    --pro-color-for-gradient: {$color_for_gradient};
+$use_global = get_field(Options::USE_GLOBAL_OPTIONS);
+$style      = '';
+
+if (!$use_global) {
+    $number_color       = Options::getFieldWithDefaults(Options::NUMBER_COLOR);
+    $background_color   = Options::getFieldWithDefaults(Options::BACKGROUND_COLOR);
+    $color_for_gradient = Options::getFieldWithDefaults(Options::COLOR_FOR_GRADIENT);
+
+    $style = '--pro-steps-number-color: ' . $number_color .
+             '; --pro-steps-background-color: ' . $background_color .
+             '; --pro-color-for-gradient: ' . $color_for_gradient . ';';
 }
-CSS;
 
 ?>
 
-<style><?= blockify_minify_css($css) ?></style>
-
-<section id="<?= $anchor; // phpcs:ignore ?>" class="<?= esc_attr($class_name); ?>" itemscope itemtype="https://schema.org/HowTo">
+<section id="<?= $anchor; // phpcs:ignore ?>" class="<?= esc_attr($class_name); ?>"<?= $style ? ' style="' . esc_attr($style) . '"' : '' ?> itemscope itemtype="https://schema.org/HowTo">
     <meta itemprop="name" content="" id="howto-block-name-meta">
     <ol>
         <?php foreach ($steps as $key => $step) :
@@ -94,27 +94,3 @@ CSS;
         <?php endforeach; ?>
     </ol>
 </section>
-
-<script>
-    (function() {
-        const section = document.querySelector('.pro-block-steps[itemtype="https://schema.org/HowTo"]');
-
-        if (!section) {
-            return;
-        }
-
-        let node = section.previousElementSibling;
-        let found = '';
-
-        while(node && !found) {
-            if (node.matches && (node.matches('h2') || node.matches('h3') || node.matches('h4'))) {
-                found = node.textContent.trim();
-            }
-            node = node.previousElementSibling;
-        }
-
-        if (found) {
-            document.getElementById('howto-block-name-meta').setAttribute('content', found);
-        }
-    })();
-</script>
