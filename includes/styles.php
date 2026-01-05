@@ -32,7 +32,8 @@ function blockify_enqueue_styles() {
 
     $css = ':root { --pro-steps-number-color: ' . Options::getFieldWithDefaults(Options::NUMBER_COLOR) .
            '; --pro-steps-background-color: ' . Options::getFieldWithDefaults(Options::BACKGROUND_COLOR) .
-           '; --pro-color-for-gradient: ' . Options::getFieldWithDefaults(Options::COLOR_FOR_GRADIENT) . '; }';
+           '; --pro-color-for-gradient: ' . Options::getFieldWithDefaults(Options::COLOR_FOR_GRADIENT) .
+           '; --pro-steps-line-color: ' . Options::getFieldWithDefaults(Options::LINE_COLOR) . '; }';
 
     wp_add_inline_style('pro-steps-style', $css);
 }
