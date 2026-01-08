@@ -9,4 +9,5 @@ if (!defined('ABSPATH')) {
 final class Nonce {
     const HERO_SETTINGS = 'blockify_hero_settings';
     const PRO_STEPS     = 'blockify_pro_steps_settings';
+    const RELINKING_BLOCK = 'blockify_relinking_block_settings';
 }

@@ -8,6 +8,7 @@ add_action('init', function() {
     global $blockify_plugin_dir;
 
     register_block_type($blockify_plugin_dir . '/blocks/iframe-lazy');
+    register_block_type($blockify_plugin_dir . '/blocks/relinking-block');
     register_block_type($blockify_plugin_dir . '/blocks/pro-steps');
     register_block_type($blockify_plugin_dir . '/blocks/hero');
 });

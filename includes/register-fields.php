@@ -15,4 +15,5 @@ function register_fields($block) {
 }
 
 register_fields('hero');
+register_fields('relinking-block');
 register_fields('pro-steps');
