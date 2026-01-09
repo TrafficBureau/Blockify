@@ -16,6 +16,12 @@ add_action('admin_enqueue_scripts', function($hook) {
         do_action('enqueue_block_editor_assets'); // Load block editor assets so ACF can register its blocks
 
         wp_enqueue_style('wp-edit-blocks');
+        wp_enqueue_style(
+            'blockify-admin-taxonomy-preview',
+            blockify_get_file_url('admin.css', 'styles'),
+            [],
+            blockify_get_file_version('admin.css', 'styles')
+        );
 
         $deps = [
             'jquery',
