@@ -55,14 +55,11 @@ function blockify_enqueue_styles() {
             '1.0'
         );
 
-        $relinking_bg_image_id = get_option(RelinkingOptions::BACKGROUND_IMAGE_ID);
-        $relinking_bg_image    = $relinking_bg_image_id ? wp_get_attachment_image_url($relinking_bg_image_id, 'full') : '';
-
         $relinking_css = ':root { --blockify-relinking-bg-color: ' . get_option(RelinkingOptions::BACKGROUND_COLOR, RelinkingOptions::DEFAULTS[RelinkingOptions::BACKGROUND_COLOR]) .
             '; --blockify-relinking-text-color: ' . get_option(RelinkingOptions::TEXT_COLOR, RelinkingOptions::DEFAULTS[RelinkingOptions::TEXT_COLOR]) .
-            '; --blockify-relinking-link-color: ' . get_option(RelinkingOptions::LINK_COLOR, RelinkingOptions::DEFAULTS[RelinkingOptions::LINK_COLOR]) .
-            '; --blockify-relinking-icon-color: ' . get_option(RelinkingOptions::ICON_COLOR, RelinkingOptions::DEFAULTS[RelinkingOptions::ICON_COLOR]) .
-            '; --blockify-relinking-bg-image: ' . ($relinking_bg_image ? "url('" . esc_url($relinking_bg_image) . "')" : 'none') . '; }';
+            '; --blockify-relinking-title-color: ' . get_option(RelinkingOptions::TITLE_COLOR, RelinkingOptions::DEFAULTS[RelinkingOptions::TITLE_COLOR]) .
+            '; --blockify-relinking-button-bg-color: ' . get_option(RelinkingOptions::BUTTON_BG_COLOR, RelinkingOptions::DEFAULTS[RelinkingOptions::BUTTON_BG_COLOR]) .
+            '; --blockify-relinking-icon-color: ' . get_option(RelinkingOptions::ICON_COLOR, RelinkingOptions::DEFAULTS[RelinkingOptions::ICON_COLOR]) . '; }';
 
         wp_add_inline_style('blockify-relinking-block-style', $relinking_css);
     }
@@ -80,8 +77,19 @@ function blockify_has_block_content(string $block_name): bool {
 
     if (is_category() || is_tag() || is_tax()) {
         $term = get_queried_object();
+        if ($term && isset($term->term_id, $term->taxonomy)) {
+            $term_description = get_term_field('description', $term->term_id, $term->taxonomy, 'raw');
+            if (!is_wp_error($term_description) && !empty($term_description)) {
+                if (has_block($block_name, $term_description)) {
+                    return true;
+                }
+                if ($block_name === 'acf/relinking-blockify' && strpos($term_description, 'relinking-blockify') !== false) {
+                    return true;
+                }
+            }
+        }
         if ($term && !empty($term->description)) {
-            return has_block($block_name, $term->description);
+            return strpos($term->description, 'blockify-relinking') !== false;
         }
     }
 

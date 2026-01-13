@@ -16,30 +16,18 @@ $class_name = 'blockify-relinking-card' . (!empty($block['className']) ? ' ' . $
 $use_global       = get_field(Options::USE_GLOBAL_OPTIONS);
 $background_color = Options::getFieldWithDefaults(Options::BACKGROUND_COLOR);
 $text_color       = Options::getFieldWithDefaults(Options::TEXT_COLOR);
-$link_color       = Options::getFieldWithDefaults(Options::LINK_COLOR);
+$title_color      = Options::getFieldWithDefaults(Options::TITLE_COLOR);
+$button_bg_color  = Options::getFieldWithDefaults(Options::BUTTON_BG_COLOR);
 $icon_color       = Options::getFieldWithDefaults(Options::ICON_COLOR);
 $section_style    = '--blockify-relinking-columns: ' . $columns . ';';
-
-$background_image_url = '';
-if ($use_global) {
-    $background_image_id = get_option(Options::BACKGROUND_IMAGE_ID);
-    if (!empty($background_image_id)) {
-        $background_image_url = wp_get_attachment_image_url($background_image_id, 'full');
-    }
-} else {
-    $background_image = get_field(Options::BACKGROUND_IMAGE_ID);
-    if (!empty($background_image['url'])) {
-        $background_image_url = $background_image['url'];
-    }
-}
 
 $style = '';
 if (!$use_global) {
     $style = '--blockify-relinking-bg-color: ' . $background_color .
         '; --blockify-relinking-text-color: ' . $text_color .
-        '; --blockify-relinking-link-color: ' . $link_color .
-        '; --blockify-relinking-icon-color: ' . $icon_color .
-        '; --blockify-relinking-bg-image: ' . ($background_image_url ? "url('" . esc_url($background_image_url) . "')" : 'none') . ';';
+        '; --blockify-relinking-title-color: ' . $title_color .
+        '; --blockify-relinking-button-bg-color: ' . $button_bg_color .
+        '; --blockify-relinking-icon-color: ' . $icon_color . ';';
 }
 
 $allowed_svg = [
@@ -221,28 +209,26 @@ $allowed_svg = [
                 ?>
                 <div class="blockify-relinking-item">
                     <article class="<?= esc_attr($item_class); ?>"<?= $style ? ' style="' . esc_attr($style) . '"' : ''; ?>>
-                    <?php if (!empty($item_image)) : ?>
-                        <figure class="blockify-relinking-card__media">
-                            <img src="<?= esc_url($item_image['url']); ?>" alt="<?= esc_attr($item_image_alt); ?>" loading="lazy" />
-                        </figure>
-                    <?php endif; ?>
-                    <div class="blockify-relinking-card__content">
-                        <?php if (!empty($item_title)) : ?>
-                            <span class="blockify-relinking-card__title">
-                                <?= esc_html($item_title); ?>
-                            </span>
-                        <?php endif; ?>
-                        <?php if (!empty($item_description) && $item_show_desc) : ?>
-                            <span class="blockify-relinking-card__description">
-                                <?= wp_kses_post($item_description); ?>
-                            </span>
-                        <?php endif; ?>
-                    </div>
-                    <div class="blockify-relinking-card__footer">
-                        <a class="blockify-relinking-card__button" href="<?= esc_url($item_button_url); ?>" rel="noopener" aria-label="<?= esc_attr($item_title ?: $item_button_text); ?>">
-                            <?= esc_html($item_button_text); ?>
-                        </a>
-                    </div>
+                        <div class="blockify-relinking-card-wrap">
+                            <?php if (!empty($item_image)) : ?>
+                                <figure class="blockify-relinking-card__media">
+                                    <img src="<?= esc_url($item_image['url']); ?>" alt="<?= esc_attr($item_image_alt); ?>" loading="lazy" />
+                                </figure>
+                            <?php endif; ?>
+                            <div class="blockify-relinking-card__content">
+                                <?php if (!empty($item_title)) : ?>
+                                    <span class="blockify-relinking-card__title"><?= esc_html($item_title); ?></span>
+                                <?php endif; ?>
+                                <?php if (!empty($item_description) && $item_show_desc) : ?>
+                                    <span class="blockify-relinking-card__description"><?= wp_kses_post($item_description); ?></span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="blockify-relinking-card__footer">
+                            <a class="blockify-relinking-card__button" href="<?= esc_url($item_button_url); ?>" rel="noopener" aria-label="<?= esc_attr($item_title ?: $item_button_text); ?>">
+                                <?= esc_html($item_button_text); ?>
+                            </a>
+                        </div>
                     </article>
                 </div>
             <?php else :
@@ -260,7 +246,6 @@ $allowed_svg = [
                 if (!empty($item_svg)) {
                     $icon_html = '<span class="blockify-relinking-card__icon" role="img" aria-label="' . esc_attr($item_alt) . '">' . wp_kses($item_svg, $allowed_svg) . '</span>';
                 }
-                
                 ?>
                 <div class="blockify-relinking-item">
                     <a class="<?= esc_attr($item_class); ?>" href="<?= esc_url($item_url); ?>" rel="noopener" aria-label="<?= esc_attr($item_title ?: $item_alt); ?>"<?= $style ? ' style="' . esc_attr($style) . '"' : ''; ?>><?= $title_html . $desc_html . $icon_html; ?></a>

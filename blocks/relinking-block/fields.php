@@ -12,9 +12,9 @@ function register_relinking_block_acf_fields()
 {
     $use_global_key        = create_acf_key(Options::USE_GLOBAL_OPTIONS . '_relinking');
     $background_color_key  = create_acf_key(Options::BACKGROUND_COLOR . '_relinking');
-    $background_image_key  = create_acf_key(Options::BACKGROUND_IMAGE_ID . '_relinking');
     $text_color_key        = create_acf_key(Options::TEXT_COLOR . '_relinking');
-    $link_color_key        = create_acf_key(Options::LINK_COLOR . '_relinking');
+    $title_color_key       = create_acf_key(Options::TITLE_COLOR . '_relinking');
+    $button_bg_color_key   = create_acf_key(Options::BUTTON_BG_COLOR . '_relinking');
     $icon_color_key        = create_acf_key(Options::ICON_COLOR . '_relinking');
     $columns_key           = create_acf_key('relinking_columns');
     $items_type_key        = create_acf_key('relinking_items_type');
@@ -223,24 +223,6 @@ function register_relinking_block_acf_fields()
                 ),
             ),
             array(
-                'key' => $background_image_key,
-                'name' => Options::BACKGROUND_IMAGE_ID,
-                'label' => 'Background image',
-                'type' => 'image',
-                'return_format' => 'array',
-                'preview_size' => 'medium',
-                'library' => 'all',
-                'conditional_logic' => array(
-                    array(
-                        array(
-                            'field' => $use_global_key,
-                            'operator' => '!=',
-                            'value' => 1,
-                        ),
-                    ),
-                ),
-            ),
-            array(
                 'key' => $text_color_key,
                 'name' => Options::TEXT_COLOR,
                 'label' => 'Text color',
@@ -257,9 +239,25 @@ function register_relinking_block_acf_fields()
                 ),
             ),
             array(
-                'key' => $link_color_key,
-                'name' => Options::LINK_COLOR,
-                'label' => 'Link color',
+                'key' => $title_color_key,
+                'name' => Options::TITLE_COLOR,
+                'label' => 'Title color',
+                'type' => 'color_picker',
+                'enable_opacity' => false,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => $use_global_key,
+                            'operator' => '!=',
+                            'value' => 1,
+                        ),
+                    ),
+                ),
+            ),
+            array(
+                'key' => $button_bg_color_key,
+                'name' => Options::BUTTON_BG_COLOR,
+                'label' => 'Button color',
                 'type' => 'color_picker',
                 'enable_opacity' => false,
                 'conditional_logic' => array(

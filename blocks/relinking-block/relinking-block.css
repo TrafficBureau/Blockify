@@ -7,29 +7,28 @@
 }
 
 .blockify-relinking-item {
-    min-width: 0;
+    max-width: 400px;
+    margin: 0 auto;
+    width: 100%;
 }
 
-.blockify-relinking-card {
+.blockify-relinking .blockify-relinking-card {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     padding: 20px 16px;
-    border-radius: 16px;
+    border-radius: 10px;
     background-color: var(--blockify-relinking-bg-color, #ffffff);
-    background-image: var(--blockify-relinking-bg-image, none);
     background-size: cover;
     background-position: center;
     text-decoration: none;
-    font-family: Arial, Helvetica, sans-serif;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
-.blockify-relinking-card:hover,
-.blockify-relinking-card:focus-visible {
-    
+.blockify-relinking-card-wrap {
+    display: flex;
+    align-items: center;
 }
 
 .blockify-relinking-card__icon {
@@ -37,6 +36,7 @@
     display: inline-flex;
     width: 64px;
     height: 64px;
+    flex: 0 0 auto;
 }
 
 .blockify-relinking-card__icon svg {
@@ -47,86 +47,124 @@
     display: block;
 }
 
+.blockify-relinking-card__icon svg path {
+    fill: currentColor;
+}
+
 .blockify-relinking-card__title {
-    color: var(--blockify-relinking-link-color, #111111);
-    font-size: 18px;
+    color: var(--blockify-relinking-title-color, #111111);
+    font-size: 16px;
     font-weight: 700;
-    line-height: 1.2;
 }
 
 .blockify-relinking-card__description {
     color: var(--blockify-relinking-text-color, #111111);
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: 12px;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
 }
 
-.blockify-relinking-card--image {
-    display: grid;
-    gap: 16px;
-    padding: 20px 18px;
-    border-radius: 18px;
-    background-color: var(--blockify-relinking-bg-color, #ffffff);
-    background-image: var(--blockify-relinking-bg-image, none);
-    background-size: cover;
-    background-position: center;
-    font-family: Arial, Helvetica, sans-serif;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+.blockify-relinking .blockify-relinking-card--image {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 20px 20px;
+}
+.blockify-relinking-item .blockify-relinking-card + p,
+.blockify-relinking-card--image .blockify-relinking-card__content br,
+.blockify-relinking-card__button br {
+    display: none;
 }
 
 .blockify-relinking-card__media {
     margin: 0;
+    height: 64px;
+    width: 64px;
+    flex: 0 0 auto;
 }
 
 .blockify-relinking-card__media img {
     display: block;
     width: 100%;
-    height: auto;
-    border-radius: 14px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
 .blockify-relinking-card__content {
     display: grid;
-    gap: 8px;
+    gap: 7px;
+    margin-left: 15px;
 }
 
 .blockify-relinking-card__footer {
     display: flex;
-    justify-content: flex-start;
+    width: 100%;
 }
 
-.blockify-relinking-card__button {
+.blockify-relinking .blockify-relinking-card__button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 10px 18px;
+    background-color: var(--blockify-relinking-button-bg-color, #656e72);
     border-radius: 999px;
-    border: 1px solid var(--blockify-relinking-link-color, #111111);
-    color: var(--blockify-relinking-link-color, #111111);
+    border: 1px solid var(--blockify-relinking-button-bg-color, #656e72);
+    color: #ffffff;
     text-decoration: none;
     font-weight: 600;
-    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s;
+    width: 100%;
 }
 
-.blockify-relinking-card__button:hover,
-.blockify-relinking-card__button:focus-visible {
-    background-color: var(--blockify-relinking-link-color, #111111);
+.blockify-relinking .blockify-relinking-card__button:hover,
+.blockify-relinking .blockify-relinking-card__button:focus-visible {
     color: #ffffff;
-    transform: translateY(-2px);
+    opacity: 0.8;
+}
+
+.blockify-relinking-card--icon {
+    cursor: pointer;
 }
 
 @media (min-width: 768px) {
-    .blockify-relinking-card {
-        align-items: flex-start;
-        text-align: left;
+    .blockify-relinking-item {
+        max-width: none;
     }
 
-    .blockify-relinking-card--image {
-        grid-template-columns: minmax(160px, 220px) 1fr;
-        align-items: center;
+    .blockify-relinking-card--icon  .blockify-relinking-card__title {
+        order: 1;
+        text-align: center;
+        width: 100%;
+    }
+
+    .blockify-relinking-card--icon  .blockify-relinking-card__description {
+        order: 3;
+    }
+
+    .blockify-relinking-card--icon  .blockify-relinking-card__icon {
+        order: 2;
+    }
+
+    .blockify-relinking-card__icon {
+        height: 88px;
+        width: 88px;
     }
 
     .blockify-relinking-card__footer {
         grid-column: 2;
+    }
+
+    .blockify-relinking .blockify-relinking-card--icon {
+        flex-direction: column;
+        max-width: none;
+        height: 100%;
+    }
+
+    .blockify-relinking .blockify-relinking-card--icon:hover,
+    .blockify-relinking .blockify-relinking-card--icon:focus-visible {
+        transform:translateY(-2px);
     }
 }
 
@@ -135,15 +173,32 @@
         grid-template-columns: 1fr;
     }
 
-    .blockify-relinking-card__icon {
-        order: 1;
+    .blockify-relinking .blockify-relinking-card--icon {
+        display: grid;
+        grid-template-columns: 64px 1fr;
+        grid-template-rows: auto auto;
+        align-items: center;
+        column-gap: 16px;
+        row-gap: 6px;
+        margin: 0 auto;
     }
 
-    .blockify-relinking-card__title {
-        order: 2;
+    .blockify-relinking-card--icon .blockify-relinking-card__icon {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        width: 64px;
+        height: 64px;
+        justify-self: start;
+        align-self: center;
     }
 
-    .blockify-relinking-card__description {
-        order: 3;
+    .blockify-relinking-card--icon .blockify-relinking-card__title {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .blockify-relinking-card--icon .blockify-relinking-card__description {
+        grid-column: 2;
+        grid-row: 2;
     }
 }
