@@ -1,0 +1,17 @@
+{
+  "name": "acf/relinking-blockify",
+  "title": "Relinking Block",
+  "description": "",
+  "style": [ "file:./relinking-block.css" ],
+  "category": "blockify",
+  "icon": "admin-links",
+  "keywords": ["relinking", "links"],
+  "acf": {
+    "mode": "edit",
+    "renderTemplate": "relinking-block.php"
+  },
+  "supports": {
+    "anchor": true,
+    "mode": true
+  }
+}
