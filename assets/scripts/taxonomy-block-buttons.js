@@ -43,6 +43,7 @@
         { name: 'acf/hero', label: 'Hero', },
         { name: 'acf/iframe-lazy-blockify', label: 'Iframe Lazy', },
         { name: 'acf/pro-steps-blockify', label: 'Pro Block Steps', },
+        { name: 'acf/relinking-blockify', label: 'Relinking Block', },
     ];
 
     const ModalComponent = ({ blockName, onCopy, }) => {

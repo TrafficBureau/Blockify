@@ -46,3 +46,5 @@ add_action('admin_enqueue_scripts', function($hook) {
         );
     }
 }, 20);
+
+// Relinking block uses standard Gutenberg controls; no extra editor JS required.
