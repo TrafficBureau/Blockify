@@ -2,6 +2,7 @@
 
 use TrafficBureau\Blockify\Admin\Nonce;
 use TrafficBureau\Blockify\Hero\Options as HeroOptions;
+use TrafficBureau\Blockify\Relinking\Options as RelinkingOptions;
 use TrafficBureau\Blockify\ProSteps\Options as ProStepsOptions;
 
 if (!defined('ABSPATH')) {
@@ -35,6 +36,10 @@ function blockify_admin_page_content()
         update_blockify_pro_steps_options();
     }
 
+    if (blockify_check_post_request(Nonce::RELINKING_BLOCK)) {
+        update_blockify_relinking_options();
+    }
+
     $file_path = blockify_get_dir('/admin/templates/index.php');
 
     if (file_exists($file_path)) {
@@ -64,6 +69,17 @@ function update_blockify_pro_steps_options() {
     foreach (ProStepsOptions::GLOBAL_KEYS as $key) {
         $method = ProStepsOptions::UPDATE_METHODS[$key] ?? 'sanitize_text_field';
         $value = isset($_POST[$key]) ? call_user_func($method, $_POST[$key]) : ProStepsOptions::DEFAULTS[$key];
+
+        update_option($key, $value);
+    }
+
+    echo '<div class="updated"><p>Налаштування збережено</p></div>';
+}
+
+function update_blockify_relinking_options() {
+    foreach (RelinkingOptions::GLOBAL_KEYS as $key) {
+        $method = RelinkingOptions::UPDATE_METHODS[$key] ?? 'sanitize_text_field';
+        $value = isset($_POST[$key]) ? call_user_func($method, $_POST[$key]) : RelinkingOptions::DEFAULTS[$key];
 
         update_option($key, $value);
     }
