@@ -1,0 +1,5 @@
+/* Admin taxonomy preview: clip oversized content inside the list form */
+body.wp-admin.term-php form#posts-filter,
+body.wp-admin.edit-tags-php form#posts-filter {
+    overflow: hidden;
+}
