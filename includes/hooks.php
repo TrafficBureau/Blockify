@@ -5,32 +5,33 @@ if (!defined('ABSPATH')) {
 }
 
 add_filter('term_description', function ($description) {
-    if (function_exists('has_blocks') && function_exists('do_blocks') && has_blocks($description)) {
-        $description = do_blocks($description);
-    }
-
-    return $description;
+    return blockify_maybe_render_term_description_blocks($description);
 }, 9);
 
-add_filter('get_term', function ($term) {
-    if (!is_admin() && isset($term->description) && function_exists('has_blocks') && has_blocks($term->description)) {
-        $term->description = do_blocks($term->description);
+function blockify_maybe_render_term_description_blocks($description) {
+    static $is_processing = false;
+    $max_description_length = 262144; // 256 KB
+
+    if (
+        $is_processing
+        || !is_string($description)
+        || $description === ''
+        || strlen($description) > $max_description_length
+        || !function_exists('has_blocks')
+        || !function_exists('do_blocks')
+        || !has_blocks($description)
+    ) {
+        return $description;
     }
 
-    return $term;
-});
+    $is_processing = true;
 
-add_filter('get_terms', function ($terms) {
-    if (!is_admin() && is_array($terms)) {
-        foreach ($terms as $term) {
-            if (isset($term->description) && function_exists('has_blocks') && has_blocks($term->description)) {
-                $term->description = do_blocks($term->description);
-            }
-        }
+    try {
+        return do_blocks($description);
+    } finally {
+        $is_processing = false;
     }
-
-    return $terms;
-});
+}
 
 require_once blockify_get_dir('/includes/svg-allowed-tags.php');
 
